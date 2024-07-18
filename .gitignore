@@ -1,5 +1,9 @@
+# Quarto-specific outputs
 *.css
 *.ipynb
 *.js
 *.woff
 *.html
+
+# macOS files
+.DS_Store
