@@ -35,6 +35,10 @@ gt_tbl = GT(coffee_sales)
 gt_tbl
 ```
 
+In the viewer we see the HTML table! It's not at all presentable but it has
+everything we need to make it look great. Now we have to use the collection of
+methods within the Great Tables API to craft the table to something that is
+presentation worthy. 
 
 ## Adding Structure to the Table
 
@@ -63,7 +67,26 @@ gt_tbl = (
 gt_tbl
 ```
 
+So long as the columns are named systematically, the combination of Polars
+selector functions and `.tab_spanner()` works exceedingly well as it's usage is
+somewhat intuitive.
+
 ## Formatting Values Within the Table Body
+
+Great Tables comes with a variety of formatting methods. All of them are of the
+form: `.fmt_*()` and they're meant to format values in the table body.
+
+Given this table deals with sales data, we have columns that are monetary values
+and they need to be formatted. We can do that either with `.fmt_currency()` or
+with `.fmt_number()`. In this case, we'll use `.fmt_number()` to perform the
+formatting of numeric values to currency values.
+
+Let's do the following things:
+
+1. target the columns that contain revenue values
+2. use 'compact' numbers (e.g., 134,523 -> 135K)
+3. manually affix the dollar sign to the value with `pattern=`
+4. Ensure that we only see three numbers for each formatted value
 
 ```{python}
 gt_tbl = (
@@ -79,8 +102,11 @@ gt_tbl = (
 gt_tbl
 ```
 
-
-
+We've formatted the revenue values and that's good. But we also have fractional
+values (i.e., between `0` and `1`) that need to be formatted. They would present
+better as percentage values so let's use `.fmt_percent()` for this task. Here,
+we have to target the correct columns and we'd prefer to see no decimal values
+in the formatted output.
 
 ```{python}
 gt_tbl = (
@@ -94,6 +120,8 @@ gt_tbl = (
 gt_tbl
 ```
 
+This formatting looks great! Much better than without the formatting in place
+because now this is now easier to parse and to understand.
 
 ## Styling the Table
 
