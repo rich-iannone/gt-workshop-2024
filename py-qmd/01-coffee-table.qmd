@@ -36,6 +36,8 @@ gt_tbl
 ```
 
 
+## Adding Structure to the Table
+
 Let's add a table header with the `.tab_header()` method. It takes two arguments:
 (1) `title=` and (2) `subtitle=`. We'll just use `title=` for this table.
 
@@ -45,9 +47,10 @@ gt_tbl = gt_tbl.tab_header(title="Sales of Coffee Equipment")
 gt_tbl
 ```
 
-Time to add spanners over some of the columns. Spanners are useful for
-organizing the columns into logical groupings. This will be where we first use
-the Polars selectors as well.
+It's now time to add spanners over some of the columns. Spanners are useful for
+organizing a table's columns into logical groupings. This will also be where we
+first use the Polars selectors (`cs.*()`) well. In this case, we'll use
+`cs.starts_with()` to target columns within each use of `.tab_spanner()`.
 
 ```{python}
 
@@ -60,8 +63,7 @@ gt_tbl = (
 gt_tbl
 ```
 
-
-
+## Formatting Values Within the Table Body
 
 ```{python}
 gt_tbl = (
@@ -93,7 +95,7 @@ gt_tbl
 ```
 
 
-
+## Styling the Table
 
 ```{python}
 gt_tbl = (
@@ -138,7 +140,7 @@ gt_tbl
 ```
 
 
-
+## Adding a Column of Nanoplots
 
 ```{python}
 gt_tbl = (
@@ -153,7 +155,7 @@ gt_tbl
 ```
 
 
-
+## Adding Images to the Table
 
 ```{python}
 gt_tbl = (
@@ -169,6 +171,13 @@ gt_tbl
 
 
 
+## Making Some Final Tweaks
+
+There's a missing value in the table and it appears as the text `"None"`. We
+don't want that in the final table. There's a method dedicated to replacing
+missing values in the table body and it's called `.sub_missing()`. It has a
+`columns=` argument but, by default, the method targets *all columns*. Here,
+we will replace `"None"` such that we get an empty cell.
 
 ```{python}
 gt_tbl = gt_tbl.sub_missing(missing_text="")
@@ -176,8 +185,10 @@ gt_tbl = gt_tbl.sub_missing(missing_text="")
 gt_tbl
 ```
 
-
-
+Now, we will replace the column labels with better labels for display purposes.
+Usually, you'll never want to keep the original labels since they're derived
+from the column names of the input DataFrame. Instead, we'll use `.cols_label()`
+to re-label all of the column labels.
 
 ```{python}
 gt_tbl = (
@@ -196,4 +207,6 @@ gt_tbl = (
 gt_tbl
 ```
 
-
+Note that we could have used `.cols_label()` much earlier. We delayed the use of
+this method because it's sometimes easier to iterate on GT code when you can see
+the original column names of the table in the viewer. 
