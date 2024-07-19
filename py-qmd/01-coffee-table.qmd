@@ -121,9 +121,36 @@ gt_tbl
 ```
 
 This formatting looks great! Much better than without the formatting in place
-because now this is now easier to parse and to understand.
+because this is all now easier to parse and to understand.
 
 ## Styling the Table
+
+Table styling involves things like:
+
+- modifying cell background colors
+- styling any and all text (color, weight, capitalizing, changing size, etc.)
+- altering the cell borders (line color, line type, etc.)
+
+We'll do some of that here with the coffee table. Starting with adding cell
+background color.
+
+Let's target the cells underneath the columns dealing with sales revenue. The
+`.tab_style()` method is what needs to be used for this. There's a bit to unpack
+here, let's start with the two arguments of that method:
+
+1. `style=`: for defining the styles; use the `style` helper here
+2. `locations=`: for where the styles are applied; use the `loc` helper here
+
+The `style` module has a few functions: (1) `style.fill()`, (2) `style.text()`,
+and (3) `style.borders()`. Each has their own specialized arguments for cell
+fill, text, and border properties. We need to use the first one here (and its
+`color=` argument).
+
+With the `loc` module, for specifying a location to style, we'll use
+`loc.body()` function, which has the `columns=` and `rows=` arguments.
+
+Okay, let's now color fill those cells dealing with revenue. The color will be
+`"aliceblue"`:
 
 ```{python}
 gt_tbl = (
@@ -137,8 +164,10 @@ gt_tbl = (
 gt_tbl
 ```
 
+Alright! Those cells now have a nice, light-blue color.
 
-
+Now, let's do pretty much the same thing, except with the columns dealing with
+profit. The color fill to use will be `"papayawhip"` here:
 
 ```{python}
 gt_tbl = (
@@ -152,7 +181,7 @@ gt_tbl = (
 gt_tbl
 ```
 
-
+Excellent. There is now much color within the table, thanks to `.tab_style()`.
 
 
 ```{python}
