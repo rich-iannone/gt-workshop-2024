@@ -3,6 +3,13 @@ output: html
 html-table-processing: none
 ---
 
+For this code-along we are going to make a complete table using the
+`coffee_sales` dataset. Though there are lots of datasets available in the gt
+package, this is not one of them. We'll import the data as a tibble object.
+
+But before doing that, we need to ensure that gt and tidyverse is loaded via
+`library()`:
+
 ```{r}
 library(gt)
 library(tidyverse)
