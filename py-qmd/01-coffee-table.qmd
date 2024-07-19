@@ -6,8 +6,8 @@ jupyter: python3
 
 For this code-along we are going to make a complete table using the
 `coffee_sales` dataset. Though there are lots of datasets available in the Great
-Tables package, this is not one of them. We'll import the data as a CSV (TODO:
-currently it's a JSON file) using Polars first.
+Tables package, this is not one of them. We'll import the data using Polars, 
+resulting in a Polars DataFrame.
 
 But before doing that, we need to import a few things from both Polars and Great
 Tables:
@@ -17,6 +17,14 @@ import polars as pl
 import polars.selectors as cs
 from great_tables import GT, loc, style
 ```
+
+The first import, `import polars as pl` imports the main module of Polars. The
+second one imports the `selectors` module as `cs` (short for column selectors).
+The third gets a few key things from Great Tables:
+
+- `GT`: the main class of Great Tables and entry point into the API
+- `loc`: the module for targeting table locations/cell, used here for styling
+- `style`: the module for defining styles; will be used alongside `loc`
 
 Now let's read in the data from the file and inspect the Polars DataFrame: 
 
