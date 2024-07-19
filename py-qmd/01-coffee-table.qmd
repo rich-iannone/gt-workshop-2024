@@ -183,6 +183,10 @@ gt_tbl
 
 Excellent. There is now much color within the table, thanks to `.tab_style()`.
 
+There is a summary row at the bottom of the table. It contains totals and it
+would stand out more if the text was more prominent. For this, we're going to
+target the entire row in `loc.body()`. We'll use `style.text(weight="bold")` to
+achieve a bolded text look in the row. 
 
 ```{python}
 gt_tbl = (
@@ -196,8 +200,22 @@ gt_tbl = (
 gt_tbl
 ```
 
+To get that done we used a Polars column expression. This one:
+
+`pl.col("product") == "Total"`
+
+How does this work? By default, `loc.body()` will target all columns, so, we
+don't use the `columns=` argument in `loc.body()`. Instead we use `rows=` and
+the expression returns the row index where there is the text `"Total"` in the
+`product` column.
 
 ## Adding a Column of Nanoplots
+
+Nanoplots are tiny, interactive plots that pack a lot of data into individual
+body cells. We have a list column in `monthly_sales` the `.fmt_nanoplot()`
+method can take a list column as acceptable input to generate a plot. The
+default `plot_type` is `"line"` but for this table we want some `"bar"`-based
+nanoplots. Here's how we do it:
 
 ```{python}
 gt_tbl = (
@@ -211,8 +229,19 @@ gt_tbl = (
 gt_tbl
 ```
 
+Try interacting with the nanoplots in the viewer. Note that hovering over any of
+the bars provides the numerical value for the data point. If you hover over the
+region to the left of the bars, the scale will be revealed. Nanoplots are pretty
+powerful and we'll learn even more about them later on in the workshop.
 
 ## Adding Images to the Table
+
+Sometimes, icon graphics in the table could aid in readability. We have a series
+of PNG images in the `img` directory. We can use them in the table with the
+formatting method called `.fmt_image()`. As input, the body cells need to have
+the filenames of the images as text. You then specify a path to the images and
+they are inserted as Base64-encoded images (makes it all self-contained and
+portable). In our table, the column to use this on is the `icon` column:
 
 ```{python}
 gt_tbl = (
@@ -226,7 +255,8 @@ gt_tbl = (
 gt_tbl
 ```
 
-
+Now we have icons in that column, making the table that much more easier to scan
+for sales/profit data.
 
 ## Making Some Final Tweaks
 
