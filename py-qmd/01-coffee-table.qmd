@@ -61,7 +61,7 @@ gt_tbl
 
 It's now time to add spanners over some of the columns. Spanners are useful for
 organizing a table's columns into logical groupings. This will also be where we
-first use the Polars selectors (`cs.*()`) well. In this case, we'll use
+first use the Polars selectors (`cs.*()`). In this case, we'll use
 `cs.starts_with()` to target columns within each use of `.tab_spanner()`.
 
 ```{python}
@@ -304,4 +304,4 @@ gt_tbl
 
 Note that we could have used `.cols_label()` much earlier. We delayed the use of
 this method because it's sometimes easier to iterate on GT code when you can see
-the original column names of the table in the viewer. 
+the original column names of the table in the viewer.
