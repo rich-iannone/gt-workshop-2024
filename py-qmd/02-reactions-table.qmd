@@ -77,7 +77,8 @@ gt_tbl
 
 It's now time to add a spanner label over some of the columns and we do this
 with `.tab_spanner()`. We'll use `cs.ends_with()` to target the columns ending
-with `"k298"`.
+with `"k298"`. For this spanner label we are using units notation which is
+within the opening `"{{"` and closing `"}}"`. 
 
 ```{python}
 gt_tbl = (
@@ -91,8 +92,19 @@ gt_tbl = (
 gt_tbl
 ```
 
+Here, the units notation text has superscripted numeric values for all of the
+individual units. The caret character `"^"` followed by the numeric value
+indicates that exponents should be rendered.
 
 ## Formatting Values Within the Table Body
+
+Units notation can have a sub-notation called chemistry notation. That is
+delimited by `"%"` characters. An example of this is: `"Amt, {{mmol %C6H6%}}"`.
+The `.fmt_units()` method processes text in units notation in the table body.
+It doesn't need the `"{{"` / `"}}"` delimiters in the text but the `"%"`
+characters are needed. That's present in the `cmpd_formula` column and so using
+`.fmt_units()` there will interpret the text values as being in chemistry
+notation.
 
 ```{python}
 gt_tbl = gt_tbl.fmt_units(columns="cmpd_formula")
