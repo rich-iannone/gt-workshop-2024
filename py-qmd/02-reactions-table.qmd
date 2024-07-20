@@ -63,11 +63,13 @@ the stub and the table body.
 ## Adding Structure to the Table
 
 Let's add a table header with the `.tab_header()` method. We'll just elect to
-provide a title here.
+provide a title here. We're using the `md()` helper function to mark the title
+text as Markdown text. The word `"mercaptan"` will be rendered as bold text due
+to the use of `"**"` around the word.
 
 ```{python}
 gt_tbl = gt_tbl.tab_header(
-    title="Gas-phase reactions of selected mercaptan compounds"
+    title=md("Gas-phase reactions of selected **mercaptan** compounds")
 )
 
 gt_tbl
@@ -82,7 +84,7 @@ gt_tbl = (
     gt_tbl
     .tab_spanner(
         columns=cs.ends_with("k298"),
-        label = "Reaction Rate Constant (298 K),<br>{{cm^3 molecules^–1 s^–1}}"
+        label="Reaction Rate Constant (298 K),<br>{{cm^3 molecules^–1 s^–1}}"
     )
 )
 
