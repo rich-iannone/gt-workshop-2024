@@ -14,15 +14,15 @@ from great_tables import GT, md
 from great_tables.data import reactions
 ```
 
-The imports from Polars are the same as before. From Great Tables
+The imports from Polars are the same as before. From Great Tables:
 
 - `GT`: the main class of Great Tables and entry point into the API
 - `md`: a helper function for declaring that new text is provided as Markdown
 - `reactions`: a dataset in the `data` module
 
 The `reactions` dataset is pretty large and not conducive to being a summary
-data. Let's transform it to a Polars DataFrame and perform some data
-transformations to make it much smaller. 
+data in its original form. Let's transform it to a Polars DataFrame and perform
+some data transformations to make it much smaller. 
 
 ```{python}
 reactions_mini = (
@@ -55,7 +55,10 @@ gt_tbl
 ```
 
 In this case we are creating a stub column by providing the name of the column
-containing row labels. We do this with the `rowname_col=` argument.
+containing row labels. We do this with the `rowname_col=` argument. Note that
+the compound names in the table don't have a column label above (that cell is
+now the stubhead label, which is absent). Also, there is a dividing line between
+the stub and the table body.
 
 ## Adding Structure to the Table
 
