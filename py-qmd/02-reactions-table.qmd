@@ -1,0 +1,161 @@
+---
+output: html
+html-table-processing: none
+jupyter: python3
+---
+
+For this code-along we are going to make a complete table using the `reactions` dataset available in the Great Tables package. Before that, we need to import a
+few things from both Polars and Great Tables:
+
+```{python}
+import polars as pl
+import polars.selectors as cs
+from great_tables import GT, md
+from great_tables.data import reactions
+```
+
+The imports from Polars are the same as before. From Great Tables
+
+- `GT`: the main class of Great Tables and entry point into the API
+- `md`: a helper function for declaring that new text is provided as Markdown
+- `reactions`: a dataset in the `data` module
+
+The `reactions` dataset is pretty large and not conducive to being a summary
+data. Let's transform it to a Polars DataFrame and perform some data
+transformations to make it much smaller. 
+
+```{python}
+reactions_mini = (
+    pl.from_pandas(reactions)
+    .filter(pl.col("cmpd_type") == "mercaptan")
+    .select([
+        "cmpd_name",
+        "cmpd_formula",
+        cs.ends_with("k298")
+    ])
+    .with_columns(
+        cmpd_formula=pl.concat_str(
+            "%" + pl.col("cmpd_formula") + "%"
+        )
+    )
+)
+
+reactions_mini
+```
+
+The `reactions_mini` DataFrame now contains 11 rows over six columns. 
+
+The first thing to do is to introduce the DataFrame to the `GT()` class. We'll
+assign this to `gt_tbl` and print the table to the viewer:
+
+```{python}
+gt_tbl = GT(reactions_mini, rowname_col="cmpd_name")
+
+gt_tbl
+```
+
+In this case we are creating a stub column by providing the name of the column
+containing row labels. We do this with the `rowname_col=` argument.
+
+## Adding Structure to the Table
+
+Let's add a table header with the `.tab_header()` method. We'll just elect to
+provide a title here.
+
+```{python}
+gt_tbl = gt_tbl.tab_header(
+    title="Gas-phase reactions of selected mercaptan compounds"
+)
+
+gt_tbl
+```
+
+It's now time to add a spanner label over some of the columns and we do this
+with `.tab_spanner()`. We'll use `cs.ends_with()` to target the columns ending
+with `"k298"`.
+
+```{python}
+gt_tbl = (
+    gt_tbl
+    .tab_spanner(
+        columns=cs.ends_with("k298"),
+        label = "Reaction Rate Constant (298 K),<br>{{cm^3 molecules^–1 s^–1}}"
+    )
+)
+
+gt_tbl
+```
+
+
+## Formatting Values Within the Table Body
+
+```{python}
+gt_tbl = gt_tbl.fmt_units(columns="cmpd_formula")
+
+gt_tbl
+```
+
+
+```{python}
+gt_tbl = gt_tbl.fmt_scientific(columns=cs.ends_with("k298"))
+
+gt_tbl
+```
+
+## Styling the Table
+
+```{python}
+gt_tbl = gt_tbl.opt_stylize(style=1, color="blue")
+
+gt_tbl
+```
+
+## Making Some Final Tweaks
+
+```{python}
+gt_tbl = gt_tbl.sub_missing()
+
+gt_tbl
+```
+
+
+```{python}
+gt_tbl = gt_tbl.cols_hide(columns="O3_k298")
+
+gt_tbl
+```
+
+Now, we will replace the column labels with better labels for display purposes.
+Usually, you'll never want to keep the original labels since they're derived
+from the column names of the input DataFrame. Instead, we'll use `.cols_label()`
+to re-label all of the column labels.
+
+```{python}
+gt_tbl = (
+    gt_tbl
+    .cols_label(
+        cmpd_formula="",
+        OH_k298="OH",
+        NO3_k298="{{%NO3%}}",
+        Cl_k298="Cl",
+    )
+)
+
+gt_tbl
+```
+
+We could have always used `.cols_label()` much earlier. Again, it's easier to
+iterate on the table when you can see the original column names in the HTML
+table.
+
+```{python}
+gt_tbl = gt_tbl.opt_horizontal_padding(scale=3)
+
+gt_tbl
+```
+
+```{python}
+gt_tbl = gt_tbl.opt_table_font(stack="humanist")
+
+gt_tbl
+```
