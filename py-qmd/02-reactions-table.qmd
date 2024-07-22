@@ -4,6 +4,8 @@ html-table-processing: none
 jupyter: python3
 ---
 
+# Code Along: Reactions Table
+
 For this code-along we are going to make a complete table using the `reactions`
 dataset available in the Great Tables package. Before that, we need to import a
 few things from both Polars and Great Tables:
