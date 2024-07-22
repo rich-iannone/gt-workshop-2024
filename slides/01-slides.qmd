@@ -50,13 +50,25 @@ format: revealjs
 
 ---
 
-![](img/06-ingredients-01.png)
+![](img/06-the-whole-game.png)
 
 ---
 
-![](img/06-ingredients-02.png)
+![](img/07-ingredients-01.png)
 
 ---
 
-![](img/06-ingredients-03.png)
+![](img/07-ingredients-02.png)
+
+---
+
+![](img/07-ingredients-03.png)
+
+---
+
+![](img/08-setup-for_table-01.png)
+
+---
+
+![](img/08-setup-for_table-02.png)
 
