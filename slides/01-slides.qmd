@@ -9,15 +9,15 @@ format: revealjs
 
 ## Structure, Format, Style
 
-![](01-structure.png)
+![](ingredients-01.png)
 
 ## Structure, Format, Style
 
-![](02-structure.png)
+![](ingredients-02.png)
 
 ## Structure, Format, Style
 
-![](03-structure.png)
+![](ingredients-03.png)
 
 
 # Structure

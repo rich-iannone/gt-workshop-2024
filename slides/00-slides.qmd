@@ -4,7 +4,6 @@ format: revealjs
 
 # Intro
 
-
 Show exciting tables. 
 
 Show some example code making simple tables.
