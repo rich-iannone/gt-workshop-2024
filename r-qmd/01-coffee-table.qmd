@@ -3,6 +3,8 @@ output: html
 html-table-processing: none
 ---
 
+# Code Along: Coffee Table
+
 For this code-along we are going to make a complete table using the
 `coffee_sales` dataset. Though there are lots of datasets available in the gt
 package, this is not one of them. We'll import the data as a tibble object.
@@ -285,3 +287,15 @@ gt_tbl
 Note that we could have used `cols_label()` much earlier. We delayed the use of
 this method because it's sometimes easier to iterate on gt code when you can see
 the original column names of the table in the viewer.
+
+# Exercises: Coffee Table
+
+Now that you have a working table, there's a few things you should experiment
+with:
+
+1. Try making the Nanoplots as line plots.
+2. Experiment with `nanoplot_options()`: you have to use that helper in the
+`options` argument
+3. Try formatting the `*dollars` columns with `fmt_currency()`, play around with
+the options in that function
+4. Export the table as an image file. Use `gtsave()` for this task.
