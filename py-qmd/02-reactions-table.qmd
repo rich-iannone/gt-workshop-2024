@@ -93,8 +93,9 @@ gt_tbl
 ```
 
 Here, the units notation text has superscripted numeric values for all of the
-individual units. The caret character `"^"` followed by the numeric value
-indicates that exponents should be rendered.
+individual units. The caret character `"^"` followed by the numeric value (e.g.,
+`"s^-1"`) indicates that these exponent values should be rendered as superscript
+numerals.
 
 ## Formatting Values Within the Table Body
 
@@ -112,6 +113,10 @@ gt_tbl = gt_tbl.fmt_units(columns="cmpd_formula")
 gt_tbl
 ```
 
+The unformatted values in the `*k298` columns would present much better when
+formatted in scientific notation. We can do that by using the
+`.fmt_scientific()` method. Here, we use `cs.ends_with("k298")` to target all
+of the relevant columns by a common part of their column names.
 
 ```{python}
 gt_tbl = gt_tbl.fmt_scientific(columns=cs.ends_with("k298"))
@@ -119,7 +124,21 @@ gt_tbl = gt_tbl.fmt_scientific(columns=cs.ends_with("k298"))
 gt_tbl
 ```
 
+It makes sense to have these values in scientific notation because readers are
+used to seeing such values represented that way. It makes comparing your values
+to other values in the literature that much easier.
+
 ## Styling the Table
+
+We can style the table using specific options within the `.tab_options()` method
+but it can be easier to start with `.opt_stylize()` since it will systematically
+theme your entire table with a simple call. There are two arguments here:
+
+- `style=`: choose a numbered style from `1` to `6`
+- `color=`: a base color, options are `"blue"`, `"cyan"`, `"pink"`, `"green"`,
+`"red"`, and `"gray"`
+
+Let's go with `style=1` and `color="blue"`
 
 ```{python}
 gt_tbl = gt_tbl.opt_stylize(style=1, color="blue")
@@ -127,7 +146,16 @@ gt_tbl = gt_tbl.opt_stylize(style=1, color="blue")
 gt_tbl
 ```
 
+There are 36 combinations of `style=` and `color=` so play around with them and
+see what looks good to you. Also, you can further modify the appearance of the
+table by using `.tab_options()` or `.tab_style()`.
+
 ## Making Some Final Tweaks
+
+There is an abundance of missing values in the table (the `"None"` values). We
+can substitute the text of these cells with alternative text. Here, we are going
+to do the simplest thing: just call the `.sub_missing()` method with its
+defaults:
 
 ```{python}
 gt_tbl = gt_tbl.sub_missing()
@@ -135,12 +163,27 @@ gt_tbl = gt_tbl.sub_missing()
 gt_tbl
 ```
 
+Note that all missing values in all columns are replaced (i.e., we didn't have
+to supply any sort of statement in the `columns=` argument). Also, the default
+replacement is a long dash (an 'em dash'). If you'd like anything other than
+that, then the `missing_text=` argument should be used.
+
+Now, we see that the `O3_k298` column has nothing but missing values. It's an
+entire column of dashes. You may want to keep this in the table, or, you may
+decide it is of little value. In the latter case, you can 'hide' the column from
+final presentation by using the `.cols_hide()` method. Let's do that here and
+specify only that column in `columns=`:
 
 ```{python}
 gt_tbl = gt_tbl.cols_hide(columns="O3_k298")
 
 gt_tbl
 ```
+
+The `O3_k298` column is no longer visible in the table. The useful thing about
+`.cols_hide()` is that we can have column values that may have useful data for
+expressions (i.e., good and convenient for building the table) but their values
+may not be useful for the finalized table display.
 
 Now, we will replace the column labels with better labels for display purposes.
 Usually, you'll never want to keep the original labels since they're derived
@@ -165,14 +208,64 @@ We could have always used `.cols_label()` much earlier. Again, it's easier to
 iterate on the table when you can see the original column names in the HTML
 table.
 
-```{python}
-gt_tbl = gt_tbl.opt_horizontal_padding(scale=3)
-
-gt_tbl
-```
+The default set of fonts for the table (*set* because of multi-platform considerations) is pleasant but sometimes having something different desirable.
+With `.opt_table_font()` we can easily set a font for the entire table or draw
+from a set of font *stacks*. In the statement below we'll ignore the `font=`
+argument and instead use `stack=`, supplying the keyword `"humanist"`:
 
 ```{python}
 gt_tbl = gt_tbl.opt_table_font(stack="humanist")
 
 gt_tbl
 ```
+
+There are several `stack=` values to choose from:
+
+- `"system-ui"`
+- `"transitional"`
+- `"old-style"`
+- `"humanist"`
+- `"geometric-humanist"`
+- `"classical-humanist"`
+- `"neo-grotesque"`
+- `"monospace-slab-serif"`
+- `"monospace-code"`
+- `"industrial"`
+- `"rounded-sans"`
+- `"slab-serif"`
+- `"antique"`
+- `"didone"`
+- `"handwritten"`
+
+Choosing `"humanist"` means the following set of fonts will be used (in this
+order):
+
+- `"Seravek"`
+- `"Gill Sans Nova"`
+- `"Ubuntu"`
+- `"Calibri"`
+- `"DejaVu Sans"`
+- `"source-sans-pro"`
+- `"sans-serif"`
+
+The fonts have a similar look and the set of fallbacks is designed such that
+there's a good chance one of the fonts will be available independent of the
+operating system or platform.
+
+The final tweak is all about spacing. We can give the side-by-side values a bit
+more space to breathe by increasing left and right cell padding. We can do this
+consistently (and easily) with the `.opt_horizontal_padding()` method. The only
+argument is `scale=` and the value provided has to be between `0` and `3`.
+Larger values (`>1`) mean more space, small values (`<1`) decrease the
+horizontal space.
+
+```{python}
+gt_tbl = gt_tbl.opt_horizontal_padding(scale=3)
+
+gt_tbl
+```
+
+Play around with the `scale=` value to determine how amount of extra space is
+needed (it may be none, but it's good to try it out). Note that there is also
+a `.opt_vertical_padding()` method that operates similarly but modifies top and
+bottom padding instead.
