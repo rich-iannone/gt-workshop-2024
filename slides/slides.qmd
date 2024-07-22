@@ -1,0 +1,71 @@
+---
+format: revealjs
+---
+
+# Intro
+
+
+Show exciting tables. 
+
+Show some example code making simple tables.
+
+Show the diagram that explains the table components.
+
+
+## Python and R Code Differences
+
+Talk about selectors (Python: Polars, R: tidyselect)
+
+## Setup for Workshop
+
+Talk about general setup issue:
+
+- how to access course material through GitHub or Posit Cloud
+- structure of files
+- how to follow along
+
+# Whole Game
+
+- this serves as a gentle intro into the API
+- Create the coffee table with Great Tables
+
+## Structure, Format, Style
+
+![](01-structure.png)
+
+## Structure, Format, Style
+
+![](02-structure.png)
+
+## Structure, Format, Style
+
+![](03-structure.png)
+
+
+
+
+# Structure
+
+- three key points:
+
+::: {.notes}
+Speaker notes go here.
+:::
+
+# Format
+
+
+::: {.notes}
+Speaker notes go here.
+:::
+
+
+# Style
+
+
+::: {.notes}
+Speaker notes go here.
+:::
+
+
+
