@@ -7,7 +7,7 @@ html-table-processing: none
 
 For this code-along we are going to make a complete table using the
 `coffee_sales` dataset. Though there are lots of datasets available in the gt
-package, this is not one of them. We'll import the data as a tibble object.
+package, this is not one of them. We'll import the CSV data as a tibble object.
 
 But before doing that, we need to ensure that gt and tidyverse is loaded:
 
@@ -16,7 +16,8 @@ library(gt)
 library(tidyverse)
 ```
 
-Now let's read in the data from the file and inspect the Polars DataFrame: 
+Now let's read in the data from the CSV file. We'll use `readr::read_csv()` for
+this, and a tibble will be returned. We will print it out to inspect the data: 
 
 ```{r}
 coffee_sales <- readr::read_csv("data/coffee-sales.csv")
@@ -265,7 +266,7 @@ gt_tbl
 
 Now, we will replace the column labels with better labels for display purposes.
 Usually, you'll never want to keep the original labels since they're derived
-from the column names of the input DataFrame. Instead, we'll use `cols_label()`
+from the column names of the input tibble. Instead, we'll use `cols_label()`
 to re-label all of the column labels.
 
 ```{r}
