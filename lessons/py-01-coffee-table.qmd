@@ -4,9 +4,9 @@ html-table-processing: none
 jupyter: python3
 ---
 
-# Code Along: Coffee Table
+# Coffee Table: Great Tables
 
-For this code-along we are going to make a complete table using data in the
+For this lesson we are going to make a complete table using data in the
 `"coffee-sales.json"` file. Though there are lots of datasets available in the
 Great Tables package, this is not one of them. We'll import the data using
 Polars, resulting in a Polars DataFrame.
@@ -290,15 +290,3 @@ gt_tbl = gt_tbl.sub_missing(missing_text="")
 
 gt_tbl
 ```
-
-# Exercises: Coffee Table
-
-Now that you have a working table, there's a few things you should experiment
-with:
-
-1. Try making the Nanoplots as line plots.
-2. Experiment with `nanoplot_options()`: you have to use that helper in the
-`options` argument (this function needs to be imported as well)
-3. Try formatting the `*dollars` columns with `.fmt_currency()`, play around
-with the options in that method
-4. Export the table as an image file. Use the `.save()` method for this task.
