@@ -291,7 +291,6 @@ gt_tbl = gt_tbl.sub_missing(missing_text="")
 gt_tbl
 ```
 
-
 # Exercises: Coffee Table
 
 Now that you have a working table, there's a few things you should experiment
