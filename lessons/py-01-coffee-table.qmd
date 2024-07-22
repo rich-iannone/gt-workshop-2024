@@ -82,31 +82,39 @@ So long as the columns are named systematically, the combination of Polars
 selector functions and `.tab_spanner()` works exceedingly well as it's usage is
 somewhat intuitive.
 
+Now, we will replace the column labels with better labels for display purposes.
+Usually, you'll never want to keep the original labels since they're derived
+from the column names of the input DataFrame. Instead, we'll use `.cols_label()`
+to re-label all of the column labels.
+
+```{python}
+gt_tbl = (
+    gt_tbl
+    .cols_label(
+        revenue_dollars="Amount",
+        profit_dollars="Amount",
+        revenue_pct="Percent",
+        profit_pct="Percent",
+        monthly_sales="Monthly Sales",
+        icon="",
+        product="Product",
+    )
+)
+
+gt_tbl
+```
+
 ## Formatting Values Within the Table Body
 
 Great Tables comes with a variety of formatting methods. All of them are of the
 form: `.fmt_*()` and they're meant to format values in the table body.
 
-Given this table deals with sales data, we have columns that are monetary values
-and they need to be formatted. We can do that either with `.fmt_currency()` or
-with `.fmt_number()`. In this case, we'll use `.fmt_number()` to perform the
-formatting of numeric values to currency values.
-
-Let's do the following things:
-
-1. target the columns that contain revenue values
-2. use 'compact' numbers (e.g., 134,523 -> 135K)
-3. manually affix the dollar sign to the value with `pattern=`
-4. Ensure that we only see three numbers for each formatted value
-
 ```{python}
 gt_tbl = (
     gt_tbl
-    .fmt_number(
+    .fmt_currency(
         columns=cs.ends_with("dollars"),
-        compact=True,
-        pattern="${x}",
-        n_sigfig=3,
+        use_subunits=False
     )
 )
 
@@ -283,31 +291,6 @@ gt_tbl = gt_tbl.sub_missing(missing_text="")
 gt_tbl
 ```
 
-Now, we will replace the column labels with better labels for display purposes.
-Usually, you'll never want to keep the original labels since they're derived
-from the column names of the input DataFrame. Instead, we'll use `.cols_label()`
-to re-label all of the column labels.
-
-```{python}
-gt_tbl = (
-    gt_tbl
-    .cols_label(
-        revenue_dollars="Amount",
-        profit_dollars="Amount",
-        revenue_pct="Percent",
-        profit_pct="Percent",
-        monthly_sales="Monthly Sales",
-        icon="",
-        product="Product",
-    )
-)
-
-gt_tbl
-```
-
-Note that we could have used `.cols_label()` much earlier. We delayed the use of
-this method because it's sometimes easier to iterate on GT code when you can see
-the original column names of the table in the viewer.
 
 # Exercises: Coffee Table
 

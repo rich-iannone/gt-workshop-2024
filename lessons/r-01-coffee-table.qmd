@@ -75,26 +75,12 @@ intuitive.
 Great Tables comes with a variety of formatting functions. All of them are of
 the form: `fmt_*()` and they're meant to format values in the table body.
 
-Given this table deals with sales data, we have columns that are monetary values
-and they need to be formatted. We can do that either with `fmt_currency()` or
-with `fmt_number()`. In this case, we'll use `fmt_number()` to perform the
-formatting of numeric values to currency values.
-
-Let's do the following things:
-
-1. target the columns that contain revenue values
-2. use 'compact' numbers (e.g., 134,523 -> 135K)
-3. manually affix the dollar sign to the value with `pattern`
-4. Ensure that we only see three numbers for each formatted value
-
 ```{r}
-gt_tbl <-
+gt_tbl <- 
     gt_tbl |>
-    fmt_number(
+    fmt_currency(
         columns = ends_with("dollars"),
-        pattern = "${x}",
-        n_sigfig = 3,
-        suffixing = TRUE
+        use_subunits = FALSE
     )
 
 gt_tbl
