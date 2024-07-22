@@ -6,8 +6,6 @@ jupyter: python3
 
 # Code Along: Coffee Table
 
-
-
 ```{python}
 import polars as pl
 import polars.selectors as cs
@@ -19,7 +17,7 @@ library(gt)
 library(tidyverse)
 ```
 
-
+Importing the data.
 
 ```{python}
 coffee_sales = pl.DataFrame.deserialize("data/coffee-sales.json", format="json")
@@ -33,26 +31,23 @@ coffee_sales <- readr::read_csv("data/coffee-sales.csv")
 coffee_sales
 ```
 
-
+`GT()` / `gt()`
 
 ```{python}
-gt_tbl = GT(coffee_sales)
+gt_tbl_p = GT(coffee_sales)
 
-gt_tbl
+gt_tbl_p
 ```
 
 ```{r}
-gt_tbl <- gt(coffee_sales)
+gt_tbl_r <- gt(coffee_sales)
 
-gt_tbl
+gt_tbl_r
 ```
-
 
 ## Adding Structure to the Table
 
-
-
-
+`tab_header()`
 
 ```{python}
 gt_tbl = gt_tbl.tab_header(title="Sales of Coffee Equipment")
@@ -61,13 +56,12 @@ gt_tbl
 ```
 
 ```{r}
-gt_tbl <- gt_tbl |> tab_header(title = "Sales of Coffee Equipment")
+gt_tbl_r <- gt_tbl_r |> tab_header(title = "Sales of Coffee Equipment")
 
-gt_tbl
+gt_tbl_r
 ```
 
-
-
+`tab_spanner()`
 
 ```{python}
 
@@ -81,16 +75,15 @@ gt_tbl
 ```
 
 ```{r}
-gt_tbl <-
-    gt_tbl |>
+gt_tbl_r <-
+    gt_tbl_r |>
     tab_spanner(label = "Revenue", columns = starts_with("revenue")) |>
     tab_spanner(label = "Profit", columns = starts_with("profit"))
 
-gt_tbl
+gt_tbl_r
 ```
 
-
-
+`cols_label()`
 
 ```{python}
 gt_tbl = (
@@ -110,24 +103,23 @@ gt_tbl
 ```
 
 ```{r}
-gt_tbl <-
-    gt_tbl |>
+gt_tbl_r <-
+    gt_tbl_r |>
     cols_label(
         icon = "",
         product = "Product",
         revenue_dollars = "Amount",
         profit_dollars = "Amount",
         revenue_pct = "Percent",
-        profit_pct = "Percent",
-        nanoplots = "Monthly Sales",
+        profit_pct = "Percent"
     )
 
-gt_tbl
+gt_tbl_r
 ```
-
 
 ## Formatting Values Within the Table Body
 
+`fmt_currency()`
 
 ```{python}
 gt_tbl = (
@@ -141,20 +133,18 @@ gt_tbl = (
 gt_tbl
 ```
 
-
 ```{r}
-gt_tbl <- 
-    gt_tbl |>
+gt_tbl_r <- 
+    gt_tbl_r |>
     fmt_currency(
         columns = ends_with("dollars"),
         use_subunits = FALSE
     )
 
-gt_tbl
+gt_tbl_r
 ```
 
-
-
+`fmt_percent()`
 
 ```{python}
 gt_tbl = (
@@ -168,25 +158,20 @@ gt_tbl = (
 gt_tbl
 ```
 
-
 ```{r}
-gt_tbl <-
-    gt_tbl |>
+gt_tbl_r <-
+    gt_tbl_r |>
     fmt_percent(
         columns = ends_with("pct"),
         decimals = 0
     )
 
-gt_tbl
+gt_tbl_r
 ```
-
-
-
 
 ## Styling the Table
 
-
-
+`tab_style()` - 1
 
 ```{python}
 gt_tbl = (
@@ -201,20 +186,17 @@ gt_tbl
 ```
 
 ```{r}
-gt_tbl <-
-    gt_tbl |>
+gt_tbl_r <-
+    gt_tbl_r |>
     tab_style(
         style = cell_fill(color = "aliceblue"),
         locations = cells_body(columns = starts_with("revenue"))
     )
 
-gt_tbl
+gt_tbl_r
 ```
 
-
-
-
-
+`tab_style()` - 2
 
 ```{python}
 gt_tbl = (
@@ -229,20 +211,17 @@ gt_tbl
 ```
 
 ```{r}
-gt_tbl <-
-    gt_tbl |>
+gt_tbl_r <-
+    gt_tbl_r |>
     tab_style(
         style = cell_fill(color = "papayawhip"),
         locations = cells_body(columns = starts_with("profit"))
     )
 
-gt_tbl
+gt_tbl_r
 ```
 
-
-
-
-
+`tab_style()` - 3
 
 ```{python}
 gt_tbl = (
@@ -257,19 +236,19 @@ gt_tbl
 ```
 
 ```{r}
-gt_tbl <-
-    gt_tbl |>
+gt_tbl_r <-
+    gt_tbl_r |>
     tab_style(
         style = cell_text(weight = "bold"),
         locations = cells_body(rows = product == "Total")
     )
 
-gt_tbl
+gt_tbl_r
 ```
 
 ## Adding a Column of Nanoplots
 
-
+`fmt_nanoplot()` / `cols_nanoplot()`
 
 ```{python}
 gt_tbl = (
@@ -284,23 +263,21 @@ gt_tbl
 ```
 
 ```{r}
-gt_tbl <-
-    gt_tbl |>
+gt_tbl_r <-
+    gt_tbl_r |>
     cols_nanoplot(
         columns = monthly_sales, 
         plot_type = "bar",
-        new_col_name = "nanoplots"
+        new_col_name = "nanoplots",
+        new_col_label = "Monthly Sales" 
     )
 
-gt_tbl
+gt_tbl_r
 ```
-
-
-
 
 ## Adding Images to the Table
 
-
+`fmt_image()`
 
 ```{python}
 gt_tbl = (
@@ -315,25 +292,19 @@ gt_tbl
 ```
 
 ```{r}
-gt_tbl <-
-    gt_tbl |>
+gt_tbl_r <-
+    gt_tbl_r |>
     fmt_image(
         columns = icon,
         path = "img/"
     )
 
-gt_tbl
+gt_tbl_r
 ```
-
-
-
-
 
 ## Making Some Final Tweaks
 
-
-
-
+`sub_missing()`
 
 ```{python}
 gt_tbl = gt_tbl.sub_missing(missing_text="")
@@ -342,12 +313,7 @@ gt_tbl
 ```
 
 ```{r}
-gt_tbl <- gt_tbl |> sub_missing(missing_text = "")
+gt_tbl_r <- gt_tbl_r |> sub_missing(missing_text = "")
 
-gt_tbl
+gt_tbl_r
 ```
-
-
-
-
-
