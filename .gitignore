@@ -4,6 +4,7 @@
 *.js
 *.woff
 *.html
+slides/slides_files*
 
 # macOS files
 .DS_Store
