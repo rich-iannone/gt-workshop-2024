@@ -4,7 +4,8 @@ html-table-processing: none
 jupyter: python3
 ---
 
-For this code-along we are going to make a complete table using the `reactions` dataset available in the Great Tables package. Before that, we need to import a
+For this code-along we are going to make a complete table using the `reactions`
+dataset available in the Great Tables package. Before that, we need to import a
 few things from both Polars and Great Tables:
 
 ```{python}
@@ -14,11 +15,12 @@ from great_tables import GT, md
 from great_tables.data import reactions
 ```
 
-The imports from Polars are the same as before. From Great Tables:
+The imports from Polars are the same as in the previous module. From Great
+Tables we need:
 
 - `GT`: the main class of Great Tables and entry point into the API
 - `md`: a helper function for declaring that new text is provided as Markdown
-- `reactions`: a dataset in the `data` module
+- `reactions`: a dataset from the `data` module
 
 The `reactions` dataset is pretty large and not conducive to being a summary
 data in its original form. Let's transform it to a Polars DataFrame and perform
@@ -208,7 +210,8 @@ We could have always used `.cols_label()` much earlier. Again, it's easier to
 iterate on the table when you can see the original column names in the HTML
 table.
 
-The default set of fonts for the table (*set* because of multi-platform considerations) is pleasant but sometimes having something different desirable.
+The default set of fonts for the table (*set* because of multi-platform
+considerations) is pleasant but sometimes having something different desirable.
 With `.opt_table_font()` we can easily set a font for the entire table or draw
 from a set of font *stacks*. In the statement below we'll ignore the `font=`
 argument and instead use `stack=`, supplying the keyword `"humanist"`:
