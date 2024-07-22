@@ -4,9 +4,9 @@ html-table-processing: none
 jupyter: python3
 ---
 
-# Code Along: Coffee Table
+# Code Along in Python: Coffee Table
 
-
+Setting up.
 
 ```{python}
 import polars as pl
@@ -14,6 +14,7 @@ import polars.selectors as cs
 from great_tables import GT, loc, style
 ```
 
+Importing the data.
 
 ```{python}
 coffee_sales = pl.DataFrame.deserialize("data/coffee-sales.json", format="json")
@@ -21,19 +22,17 @@ coffee_sales = pl.DataFrame.deserialize("data/coffee-sales.json", format="json")
 coffee_sales
 ```
 
+`GT()`
 
 ```{python}
-gt_tbl = GT(____)
+gt_tbl = GT(______) # <- what do we introduce to GT()?
 
 gt_tbl
 ```
 
-
-
 ## Adding Structure to the Table
 
-Let's add a table header with the `.tab_header()` method. It takes two arguments:
-(1) `title=` and (2) `subtitle=`. We'll just use `title=` for this table.
+`.tab_header()`
 
 ```{python}
 gt_tbl = gt_tbl.tab_header(title="Sales of Coffee Equipment")
@@ -41,42 +40,32 @@ gt_tbl = gt_tbl.tab_header(title="Sales of Coffee Equipment")
 gt_tbl
 ```
 
-It's now time to add spanners over some of the columns. Spanners are useful for
-organizing a table's columns into logical groupings. This will also be where we
-first use the Polars selectors (`cs.*()`). In this case, we'll use
-`cs.starts_with()` to target columns within each use of `.tab_spanner()`.
+`.tab_spanner()`
 
 ```{python}
 
 gt_tbl = (
     gt_tbl
     .tab_spanner(label="Revenue", columns=cs.starts_with("revenue"))
-    .tab_spanner(label="Profit", columns=cs._starts_with_("_____"))
+    .tab_spanner(label="Profit", columns=cs._starts_with_("______")) # <- ?
 )
 
 gt_tbl
 ```
 
-So long as the columns are named systematically, the combination of Polars
-selector functions and `.tab_spanner()` works exceedingly well as it's usage is
-somewhat intuitive.
-
-Now, we will replace the column labels with better labels for display purposes.
-Usually, you'll never want to keep the original labels since they're derived
-from the column names of the input DataFrame. Instead, we'll use `.cols_label()`
-to re-label all of the column labels.
+`.cols_label()`
 
 ```{python}
 gt_tbl = (
     gt_tbl
     .cols_label(
+        icon="______", # <- We want no label above the icon
+        product="Product",
         revenue_dollars="Amount",
         profit_dollars="Amount",
         revenue_pct="Percent",
         profit_pct="Percent",
-        monthly_sales="______",
-        icon="_____",
-        product="Product",
+        monthly_sales="Monthly Sales"
     )
 )
 
@@ -85,14 +74,13 @@ gt_tbl
 
 ## Formatting Values Within the Table Body
 
-Great Tables comes with a variety of formatting methods. All of them are of the
-form: `.fmt_*()` and they're meant to format values in the table body.
+`.fmt_currency()`
 
 ```{python}
 gt_tbl = (
     gt_tbl
     .fmt_currency(
-        columns=cs.____("____"),
+        columns=cs.______("______"), # <- Need to select columns here
         use_subunits=False
     )
 )
@@ -100,13 +88,13 @@ gt_tbl = (
 gt_tbl
 ```
 
-
+`.fmt_percent()`
 
 ```{python}
 gt_tbl = (
     gt_tbl
     .fmt_percent(
-        columns=cs.ends_with("____"),
+        columns=cs.ends_with("______"), # <- What string do we use?
         decimals=0
     )
 )
@@ -114,67 +102,53 @@ gt_tbl = (
 gt_tbl
 ```
 
-
-
 ## Styling the Table
 
-
+`.tab_style()` - 1
 
 ```{python}
 gt_tbl = (
     gt_tbl
     .tab_style(
         style=style.fill(color="aliceblue"),
-        locations=loc.body(columns=cs._____("revenue"))
+        locations=loc.body(columns=cs.______("revenue")) # <- ?
     )
 )
 
 gt_tbl
 ```
 
+`.tab_style()` - 2
 
 ```{python}
 gt_tbl = (
     gt_tbl
     .tab_style(
-        style=style.____(color="papayawhip"),
-        locations=loc.body(columns=cs.____("profit"))
+        style=style.______(color="papayawhip"), # <- fn for specifying a fill?
+        locations=loc.body(columns=cs.______("profit")) # <- ?
     )
 )
 
 gt_tbl
 ```
 
-
+`.tab_style()` - 3
 
 ```{python}
 gt_tbl = (
     gt_tbl
     .tab_style(
         style=style.text(weight="bold"),
-        locations=loc.body(rows=pl.col("product") == "Total"),
+        locations=loc.body(rows=pl.col("product") == "______"), # <- What str?
     )
 )
 
 gt_tbl
 ```
 
-To get that done we used a Polars column expression. This one:
-
-`pl.col("product") == "Total"`
-
-How does this work? By default, `loc.body()` will target all columns, so, we
-don't use the `columns=` argument in `loc.body()`. Instead we use `rows=` and
-the expression returns the row index where there is the text `"Total"` in the
-`product` column.
-
 ## Adding a Column of Nanoplots
 
-Nanoplots are tiny, interactive plots that pack a lot of data into individual
-body cells. We have a list column in `monthly_sales` the `.fmt_nanoplot()`
-method can take a list column as acceptable input to generate a plot. The
-default `plot_type` is `"line"` but for this table we want some `"bar"`-based
-nanoplots. Here's how we do it:
+`.fmt_nanoplot()`
 
 ```{python}
 gt_tbl = (
@@ -188,19 +162,9 @@ gt_tbl = (
 gt_tbl
 ```
 
-Try interacting with the nanoplots in the viewer. Note that hovering over any of
-the bars provides the numerical value for the data point. If you hover over the
-region to the left of the bars, the scale will be revealed. Nanoplots are pretty
-powerful and we'll learn even more about them later on in the workshop.
-
 ## Adding Images to the Table
 
-Sometimes, icon graphics in the table could aid in readability. We have a series
-of PNG images in the `img` directory. We can use them in the table with the
-formatting method called `.fmt_image()`. As input, the body cells need to have
-the filenames of the images as text. You then specify a path to the images and
-they are inserted as Base64-encoded images (makes it all self-contained and
-portable). In our table, the column to use this on is the `icon` column:
+`.fmt_image()`
 
 ```{python}
 gt_tbl = (
@@ -214,32 +178,12 @@ gt_tbl = (
 gt_tbl
 ```
 
-Now we have icons in that column, making the table that much more easier to scan
-for sales/profit data.
-
 ## Making Some Final Tweaks
 
-There's a missing value in the table and it appears as the text `"None"`. We
-don't want that in the final table. There's a method dedicated to replacing
-missing values in the table body and it's called `.sub_missing()`. It has a
-`columns=` argument but, by default, the method targets *all columns*. Here,
-we will replace `"None"` such that we get an empty cell.
+`.sub_missing()`
 
 ```{python}
 gt_tbl = gt_tbl.sub_missing(missing_text="")
 
 gt_tbl
 ```
-
-
-# Exercises: Coffee Table
-
-Now that you have a working table, there's a few things you should experiment
-with:
-
-1. Try making the Nanoplots as line plots.
-2. Experiment with `nanoplot_options()`: you have to use that helper in the
-`options` argument (this function needs to be imported as well)
-3. Try formatting the `*dollars` columns with `.fmt_currency()`, play around
-with the options in that method
-4. Export the table as an image file. Use the `.save()` method for this task.
