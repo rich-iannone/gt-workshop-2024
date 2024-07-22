@@ -1,0 +1,26 @@
+---
+format: revealjs
+---
+
+# Intro
+
+
+Show exciting tables. 
+
+Show some example code making simple tables.
+
+Show the diagram that explains the table components.
+
+
+## Python and R Code Differences
+
+Talk about selectors (Python: Polars, R: tidyselect)
+
+## Setup for Workshop
+
+Talk about general setup issue:
+
+- how to access course material through GitHub or Posit Cloud
+- structure of files
+- how to follow along
+
