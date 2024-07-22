@@ -2,46 +2,61 @@
 format: revealjs
 ---
 
-# Whole Game
+![](img/01-display-tables-needs.png)
 
-- this serves as a gentle intro into the API
-- Create the coffee table with Great Tables
+---
 
-## Structure, Format, Style
+![](img/02-beautiful-internet-tbls-01.png)
 
-![](ingredients-01.png)
+---
 
-## Structure, Format, Style
+![](img/02-beautiful-internet-tbls-02.png)
 
-![](ingredients-02.png)
+---
 
-## Structure, Format, Style
+![](img/02-beautiful-internet-tbls-03.png)
 
-![](ingredients-03.png)
+---
 
+![](img/02-beautiful-internet-tbls-04.png)
 
-# Structure
+---
 
-- three key points:
+![](img/03-tables-today-01.png)
 
-::: {.notes}
-Speaker notes go here.
-:::
+---
 
-# Format
+![](img/03-tables-today-02.png)
 
+---
 
-::: {.notes}
-Speaker notes go here.
-:::
+![](img/03-tables-today-03.png)
 
+---
 
-# Style
+![](img/04-gt-and-great-tables-01.png)
 
+---
 
-::: {.notes}
-Speaker notes go here.
-:::
+![](img/04-gt-and-great-tables-02.png)
 
+---
 
+![](img/04-gt-and-great-tables-03.png)
+
+---
+
+![](img/05-table-display-framework.png)
+
+---
+
+![](img/06-ingredients-01.png)
+
+---
+
+![](img/06-ingredients-02.png)
+
+---
+
+![](img/06-ingredients-03.png)
 
