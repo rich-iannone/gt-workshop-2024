@@ -70,6 +70,26 @@ So long as the columns are named systematically, the combination of a select
 helper and `tab_spanner()` works exceedingly well as it's usage is somewhat
 intuitive.
 
+Now, we will replace the column labels with better labels for display purposes.
+Usually, you'll never want to keep the original labels since they're derived
+from the column names of the input tibble. Instead, we'll use `cols_label()`
+to re-label all of the column labels.
+
+```{r}
+gt_tbl <-
+    gt_tbl |>
+    cols_label(
+        icon = "",
+        product = "Product",
+        revenue_dollars = "Amount",
+        profit_dollars = "Amount",
+        revenue_pct = "Percent",
+        profit_pct = "Percent"
+    )
+
+gt_tbl
+```
+
 ## Formatting Values Within the Table Body
 
 Great Tables comes with a variety of formatting functions. All of them are of
@@ -177,7 +197,7 @@ gt_tbl <-
         locations = cells_body(rows = product == "Total")
     )
 
-gt_tbl
+gt_tbl %>% cols_hide(c(icon, monthly_sales))
 ```
 
 To get that done we used an R expression. This one:
@@ -203,7 +223,8 @@ gt_tbl <-
     cols_nanoplot(
         columns = monthly_sales, 
         plot_type = "bar",
-        new_col_name = "nanoplots"
+        new_col_name = "nanoplots",
+        new_col_label = "Monthly Revenue" 
     )
 
 gt_tbl
@@ -250,31 +271,6 @@ gt_tbl <- gt_tbl |> sub_missing(missing_text = "")
 
 gt_tbl
 ```
-
-Now, we will replace the column labels with better labels for display purposes.
-Usually, you'll never want to keep the original labels since they're derived
-from the column names of the input tibble. Instead, we'll use `cols_label()`
-to re-label all of the column labels.
-
-```{r}
-gt_tbl <-
-    gt_tbl |>
-    cols_label(
-        icon = "",
-        product = "Product",
-        revenue_dollars = "Amount",
-        profit_dollars = "Amount",
-        revenue_pct = "Percent",
-        profit_pct = "Percent",
-        nanoplots = "Monthly Sales",
-    )
-
-gt_tbl
-```
-
-Note that we could have used `cols_label()` much earlier. We delayed the use of
-this method because it's sometimes easier to iterate on gt code when you can see
-the original column names of the table in the viewer.
 
 # Exercises: Coffee Table
 
