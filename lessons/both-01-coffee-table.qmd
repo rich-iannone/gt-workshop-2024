@@ -4,7 +4,9 @@ html-table-processing: none
 jupyter: python3
 ---
 
-# Code Along: Coffee Table
+# Coffee Table: Great Tables and gt
+
+Setting up.
 
 ```{python}
 import polars as pl
