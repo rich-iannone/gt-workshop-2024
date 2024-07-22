@@ -36,8 +36,9 @@ coffee_sales = pl.DataFrame.deserialize("data/coffee-sales.json", format="json")
 coffee_sales
 ```
 
-The first thing to do is to introduce the DataFrame to the `GT()` class. We'll
-assign this to `gt_tbl` and print the table to the viewer:
+When making a display table with Great Tables, the first thing is always to
+introduce the DataFrame to the `GT()` class. We'll assign this to `gt_tbl` and
+print the table to the viewer:
 
 ```{python}
 gt_tbl = GT(coffee_sales)
