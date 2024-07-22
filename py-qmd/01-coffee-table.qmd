@@ -4,6 +4,8 @@ html-table-processing: none
 jupyter: python3
 ---
 
+# Code Along: Coffee Table
+
 For this code-along we are going to make a complete table using the
 `coffee_sales` dataset. Though there are lots of datasets available in the Great
 Tables package, this is not one of them. We'll import the data using Polars, 
