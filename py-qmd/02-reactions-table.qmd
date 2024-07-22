@@ -47,7 +47,7 @@ reactions_mini
 
 The `reactions_mini` DataFrame now contains 11 rows over six columns. 
 
-The first thing to do is to introduce the DataFrame to the `GT()` class. We'll
+The next thing to do is to introduce the DataFrame to the `GT()` class. We'll
 assign this to `gt_tbl` and print the table to the viewer:
 
 ```{python}
