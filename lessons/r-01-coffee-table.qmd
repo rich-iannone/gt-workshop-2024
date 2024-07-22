@@ -3,11 +3,11 @@ output: html
 html-table-processing: none
 ---
 
-# Code Along: Coffee Table
+# Coffee Table: gt
 
-For this code-along we are going to make a complete table using the
-`coffee_sales` dataset. Though there are lots of datasets available in the gt
-package, this is not one of them. We'll import the CSV data as a tibble object.
+For this lesson we are going to make a complete table using the `coffee_sales`
+dataset. Though there are lots of datasets available in the gt package, this is
+not one of them. We'll import the CSV data as a tibble object.
 
 But before doing that, we need to ensure that gt and tidyverse is loaded:
 
@@ -92,7 +92,7 @@ gt_tbl
 
 ## Formatting Values Within the Table Body
 
-Great Tables comes with a variety of formatting functions. All of them are of
+The gt package comes with a variety of formatting functions. All of them are of
 the form: `fmt_*()` and they're meant to format values in the table body.
 
 ```{r}
@@ -196,8 +196,6 @@ gt_tbl <-
         style = cell_text(weight = "bold"),
         locations = cells_body(rows = product == "Total")
     )
-
-gt_tbl %>% cols_hide(c(icon, monthly_sales))
 ```
 
 To get that done we used an R expression. This one:
@@ -271,15 +269,3 @@ gt_tbl <- gt_tbl |> sub_missing(missing_text = "")
 
 gt_tbl
 ```
-
-# Exercises: Coffee Table
-
-Now that you have a working table, there's a few things you should experiment
-with:
-
-1. Try making the Nanoplots as line plots.
-2. Experiment with `nanoplot_options()`: you have to use that helper in the
-`options` argument
-3. Try formatting the `*dollars` columns with `fmt_currency()`, play around with
-the options in that function
-4. Export the table as an image file. Use `gtsave()` for this task.
