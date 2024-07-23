@@ -62,7 +62,7 @@ gt_tbl
 ```
 
 It's now time to add a spanner label over some of the columns and we do this
-with `.tab_spanner()`. We'll use the `ends_with()` helper function to target the
+with `tab_spanner()`. We'll use the `ends_with()` helper function to target the
 columns ending with `"k298"`. For this spanner label we are using units notation
 which is within the opening `"{{"` and closing `"}}"`. 
 
@@ -133,9 +133,9 @@ gt_tbl <- gt_tbl |> opt_stylize(style = 1, color = "blue")
 gt_tbl
 ```
 
-There are 36 combinations of `style=` and `color=` so play around with them and
+There are 36 combinations of `style` and `color` so play around with them and
 see what looks good to you. Also, you can further modify the appearance of the
-table by using `.tab_options()` or `.tab_style()`.
+table by using `tab_options()` or `tab_style()`.
 
 ## Making Some Final Tweaks
 
