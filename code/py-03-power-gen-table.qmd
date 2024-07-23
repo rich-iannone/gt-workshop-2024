@@ -1,0 +1,251 @@
+---
+output: html
+html-table-processing: none
+jupyter: python3
+---
+
+# Code Along in Python: Power Generation Table
+
+Setting up.
+
+```{python}
+import pandas as pd
+from great_tables import GT, md
+```
+
+Importing the data.
+
+```{python}
+power_generation = pd.read_csv("data/power-generation.csv")
+
+power_generation
+```
+
+`GT()`
+
+```{python}
+gt_tbl = GT(power_generation)
+
+gt_tbl
+```
+
+## Adding Structure to the Table
+
+`.tab_header()` + `md()`
+
+```{python}
+gt_tbl = (
+    gt_tbl
+    .tab_header(
+        title=md("2023 Mean **Carbon Intensity** (gCO2eq/kWh) and **Power Consumption** Breakdown (%)")
+    )
+)
+
+gt_tbl
+```
+
+`.tab_source_note()` + `md()`
+
+```{python}
+gt_tbl = (
+    gt_tbl
+    .tab_source_note(
+        md(
+            '<br><div style="text-align: left;">'
+            "**Source**: api.electricitymap.org" 
+            " | **Methodology**: https://www.electricitymaps.com/methodology." 
+            " Some emissions factors are based on IPCC 2014 defaults, while some are based on more accurate regional factors."
+            "<br>All zones are publicly available on the *Carbon intensity and emission factors* tab via Google docs link<br>"
+            "</div>"
+            "<br>"
+        )
+    )
+)
+
+gt_tbl
+```
+
+`.cols_width()`
+
+```{python}
+gt_tbl = (
+    gt_tbl
+    .cols_width(
+        {
+            "Zone": "80px",
+            "CO2 Intensity": "62px",
+            "Hydro": "62px",
+            "Nuclear": "62px",
+            "Wind": "62px",
+            "Solar": "62px",
+            "Geothermal": "62px",
+            "Biomass": "62px",
+            "Gas": "62px",
+            "Coal": "62px",
+            "Oil": "62px",
+            "Unknown": "62px",
+            "Hydro Discharge": "62px",
+            "Battery Discharge": "62px"
+        }
+    ) 
+)
+
+gt_tbl
+```
+
+## Formatting Values Within the Table Body
+
+`.fmt_percent()`
+
+```{python}
+gt_tbl = (
+    gt_tbl
+    .fmt_percent(
+        columns=[
+            "Hydro", "Nuclear", "Wind", "Solar", "Geothermal",
+            "Biomass", "Gas", "Coal", "Oil", "Unknown",
+            "Hydro Discharge", "Battery Discharge"
+        ],
+        decimals=1
+    )
+)
+
+gt_tbl
+```
+
+`.fmt_integer()`
+
+```{python}
+gt_tbl = gt_tbl.fmt_integer(columns="CO2 Intensity")
+
+gt_tbl
+```
+
+## Styling the Table
+
+`.data_color()` - 1
+
+```{python}
+gt_tbl = (
+    gt_tbl
+    .data_color(
+        columns="CO2 Intensity",
+        palette=[
+            "#00A600", "#E6E600", "#E8C32E",
+            "#D69C4E", "#Dc863B", "sienna",
+            "sienna4", "tomato4", "brown"
+            ],
+        domain=[0, 900]
+    )
+)
+
+gt_tbl
+```
+
+`.data_color()` - 2
+
+```{python}
+gt_tbl = (
+    gt_tbl
+    .data_color(
+        columns=["Hydro", "Nuclear", "Wind", "Solar", "Geothermal"],
+        palette=["#00A600", "chartreuse3", "chartreuse4", "snow"][::-1],
+        domain=[0, 1]
+    )
+)
+
+gt_tbl
+```
+
+`.data_color()` - 3
+
+```{python}
+gt_tbl = (
+    gt_tbl
+    .data_color(
+        columns="Biomass",
+        palette=["snow", "#EEC900", "#E8C32E", "#D69C4E"],
+        domain=[0, 0.3]
+    )
+)
+
+gt_tbl
+```
+
+`.data_color()` - 4
+
+```{python}
+gt_tbl = (
+    gt_tbl
+    .data_color(
+        columns=["Gas", "Coal", "Oil"],
+        palette=["tomato4", "sienna4", "#D69C4E", "#Dc863B", "snow"][::-1],
+        domain=[0, 1]
+    )
+)
+
+gt_tbl
+```
+
+`.data_color()` - 5
+
+```{python}
+gt_tbl = (
+    gt_tbl
+    .data_color(
+        columns=[
+            "Zone", "Unknown", "Hydro Discharge", "Battery Discharge"
+        ],
+        palette=["snow", "snow", "snow", "snow"]
+    )
+)
+
+gt_tbl
+```
+
+## Making Some Final Tweaks
+
+`.cols_align()` - 1
+
+```{python}
+gt_tbl = gt_tbl.cols_align(align="center")
+
+gt_tbl
+```
+
+`.cols_align()` - 2
+
+```{python}
+gt_tbl = gt_tbl.cols_align(align="left", columns="Zone")
+
+gt_tbl
+```
+
+`.opt_table_font()`
+
+```{python}
+gt_tbl = gt_tbl.opt_table_font(stack="humanist")
+
+gt_tbl
+```
+
+`.tab_options()`
+
+```{python}
+gt_tbl = (
+    gt_tbl
+    .tab_options(
+        source_notes_font_size="x-small",
+        source_notes_padding="3px",
+        data_row_padding="1px",
+        heading_background_color="antiquewhite",
+        source_notes_background_color="antiquewhite",
+        column_labels_background_color="antiquewhite",
+        table_background_color="snow",
+        data_row_padding_horizontal="3px",
+        column_labels_padding_horizontal="10px"
+    )
+)
+
+gt_tbl
+```
