@@ -1,0 +1,149 @@
+---
+output: html
+html-table-processing: none
+jupyter: python3
+---
+
+# Code Along in Python: Reactions Table
+
+Setting up.
+
+```{python}
+import polars as pl
+import polars.selectors as cs
+from great_tables import GT, md
+from great_tables.data import reactions
+```
+
+Transforming the data.
+
+```{python}
+reactions_mini = (
+    pl.from_pandas(reactions)
+    .filter(pl.col("cmpd_type") == "mercaptan")
+    .select([
+        "cmpd_name",
+        "cmpd_formula",
+        cs.ends_with("k298")
+    ])
+    .with_columns(
+        cmpd_formula=pl.concat_str(
+            "%" + pl.col("cmpd_formula") + "%"
+        )
+    )
+)
+
+reactions_mini
+```
+
+`GT()`
+
+```{python}
+gt_tbl = GT(______, rowname_col="cmpd_name") # <- what do we introduce to GT()?
+
+gt_tbl
+```
+
+## Adding Structure to the Table
+
+`.tab_header()`
+
+```{python}
+gt_tbl = gt_tbl.tab_header(
+    title=md("Gas-phase reactions of selected **mercaptan** compounds")
+)
+
+gt_tbl
+```
+
+`.tab_spanner()`
+
+```{python}
+gt_tbl = (
+    gt_tbl
+    .tab_spanner(
+        columns=cs.ends_with("______"), # <- which columns have the numerical data?
+        label="Reaction Rate Constant (298 K),<br>{{cm^3 molecules^–1 s^–1}}"
+    )
+)
+
+gt_tbl
+```
+
+`.cols_label()`
+
+```{python}
+gt_tbl = (
+    gt_tbl
+    .cols_label(
+        cmpd_formula="",
+        OH_k298="OH",
+        NO3_k298="{{%NO3%}}",
+        Cl_k298="Cl",
+    )
+)
+
+gt_tbl
+```
+
+## Formatting Values Within the Table Body
+
+`.fmt_units()`
+
+```{python}
+gt_tbl = gt_tbl.fmt_units(columns="______")  # <- which column has chem stuff?
+
+gt_tbl
+```
+
+`.fmt_scientific()`
+
+```{python}
+gt_tbl = gt_tbl.fmt_scientific(columns=cs.ends_with("______")) # <- ?
+
+gt_tbl
+```
+
+## Styling the Table
+
+`.opt_stylize()`
+
+```{python}
+gt_tbl = gt_tbl.opt_stylize(style=1, color="blue")
+
+gt_tbl
+```
+
+## Making Some Final Tweaks
+
+`.sub_missing()`
+
+```{python}
+gt_tbl = gt_tbl.sub_missing()
+
+gt_tbl
+```
+
+`.cols_hide()`
+
+```{python}
+gt_tbl = gt_tbl.cols_hide(columns="______") # <- which column has nothing?
+
+gt_tbl
+```
+
+`.opt_table_font()`
+
+```{python}
+gt_tbl = gt_tbl.opt_table_font(stack="humanist")
+
+gt_tbl
+```
+
+`.opt_horizontal_padding()`
+
+```{python}
+gt_tbl = gt_tbl.opt_horizontal_padding(scale=3)
+
+gt_tbl
+```
