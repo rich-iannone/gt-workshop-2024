@@ -51,7 +51,7 @@ gt_tbl
 gt_tbl <-
     gt_tbl |>
     tab_spanner(
-        columns = ends_with("______"), # <- ?
+        columns = ends_with("______"), # <- which columns have the numerical data?
         label = md(
             "Reaction Rate Constant (298 K),<br>{{cm^3 molecules^–1 s^–1}}"
         )
