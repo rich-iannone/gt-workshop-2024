@@ -47,7 +47,7 @@ gt_tbl
 gt_tbl = (
     gt_tbl
     .tab_spanner(label="Revenue", columns=cs.starts_with("revenue"))
-    .tab_spanner(label="Profit", columns=cs._starts_with_("______")) # <- ?
+    .tab_spanner(label="Profit", columns=cs._starts_with("______")) # <- ?
 )
 
 gt_tbl
