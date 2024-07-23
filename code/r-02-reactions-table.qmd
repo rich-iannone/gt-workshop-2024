@@ -1,0 +1,138 @@
+---
+output: html
+html-table-processing: none
+---
+
+# Code Along in R: Reactions Table
+
+Setting up.
+
+```{r}
+library(gt)
+library(tidyverse)
+```
+
+Transforming the data.
+
+```{r}
+reactions_mini <-
+  reactions |>
+  dplyr::filter(cmpd_type == "mercaptan") |>
+  dplyr::select(cmpd_name, cmpd_formula, OH_k298, O3_k298, Cl_k298, NO3_k298)
+
+reactions_mini
+```
+
+`gt()`
+
+```{r}
+gt_tbl <- gt(______, rowname_col="cmpd_name") # <- what do we introduce to gt()?
+
+gt_tbl
+```
+
+## Adding Structure to the Table
+
+`tab_header()`
+
+```{r}
+gt_tbl <-
+    gt_tbl |>
+    tab_header(
+        title = md("Gas-phase reactions of selected **mercaptan** compounds")
+    )
+
+gt_tbl
+```
+
+`tab_spanner()`
+
+```{r}
+gt_tbl <-
+    gt_tbl |>
+    tab_spanner(
+        columns = ends_with("______"), # <- ?
+        label = md(
+            "Reaction Rate Constant (298 K),<br>{{cm^3 molecules^–1 s^–1}}"
+        )
+    )
+
+gt_tbl
+```
+
+`cols_label()`
+
+```{r}
+gt_tbl <-
+    gt_tbl |>
+    cols_label(
+        cmpd_formula = "",
+        OH_k298 = "OH",
+        NO3_k298 = "{{%NO3%}}",
+        Cl_k298 = "Cl",
+    )
+
+gt_tbl
+```
+
+## Formatting Values Within the Table Body
+
+`fmt_chem()`
+
+```{r}
+gt_tbl <- gt_tbl |> fmt_chem(columns = "______") # <- which column has chem stuff?
+
+gt_tbl
+```
+
+`fmt_scientific()`
+
+```{r}
+gt_tbl <- gt_tbl |> fmt_scientific(columns = ends_with("______")) # <- ?
+
+gt_tbl
+```
+
+## Styling the Table
+
+`opt_stylize()`
+
+```{r}
+gt_tbl <- gt_tbl |> opt_stylize(style = 1, color = "blue")
+
+gt_tbl
+```
+
+## Making Some Final Tweaks
+
+`sub_missing()`
+
+```{r}
+gt_tbl <- gt_tbl |> sub_missing()
+
+gt_tbl
+```
+
+`cols_hide()`
+
+```{r}
+gt_tbl <- gt_tbl |> cols_hide(columns = "______") # <- which column has nothing?
+
+gt_tbl
+```
+
+`opt_table_font()`
+
+```{r}
+gt_tbl <- gt_tbl |> opt_table_font(stack = "humanist")
+
+gt_tbl
+```
+
+`opt_horizontal_padding()`
+
+```{r}
+gt_tbl <- gt_tbl |> opt_horizontal_padding(scale = 3)
+
+gt_tbl
+```
