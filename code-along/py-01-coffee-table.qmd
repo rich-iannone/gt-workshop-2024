@@ -25,9 +25,9 @@ coffee_sales
 `GT()`
 
 ```{python}
-gt_tbl = GT(______) # <- what do we introduce to GT()?
+gt_tbl_1 = GT(...) # <- what do we introduce to GT()?
 
-gt_tbl
+gt_tbl_1
 ```
 
 ## Adding Structure to the Table
@@ -35,41 +35,39 @@ gt_tbl
 `.tab_header()`
 
 ```{python}
-gt_tbl = gt_tbl.tab_header(title="Sales of Coffee Equipment")
+gt_tbl_2 = gt_tbl_1.tab_header(title="Sales of Coffee Equipment")
 
-gt_tbl
+gt_tbl_2
 ```
 
 `.tab_spanner()`
 
 ```{python}
 
-gt_tbl = (
-    gt_tbl
+gt_tbl_3 = (
+    gt_tbl_2
     .tab_spanner(label="Revenue", columns=cs.starts_with("revenue"))
-    .tab_spanner(label="Profit", columns=cs._starts_with("______")) # <- ?
+    # .tab_spanner(...) 
 )
 
-gt_tbl
+gt_tbl_3
 ```
 
 `.cols_label()`
 
 ```{python}
-gt_tbl = (
-    gt_tbl
+# We want to make `icon` blank and re-label all other columns
+gt_tbl_4 = (
+    gt_tbl_3
     .cols_label(
-        icon="______", # <- We want no label above the icon
         product="Product",
         revenue_dollars="Amount",
-        profit_dollars="Amount",
         revenue_pct="Percent",
-        profit_pct="Percent",
         monthly_sales="Monthly Sales"
     )
 )
 
-gt_tbl
+gt_tbl_4
 ```
 
 ## Formatting Values Within the Table Body
@@ -77,29 +75,29 @@ gt_tbl
 `.fmt_currency()`
 
 ```{python}
-gt_tbl = (
-    gt_tbl
+gt_tbl_5 = (
+    gt_tbl_4
     .fmt_currency(
-        columns=cs.______("______"), # <- Need to select columns here
+        columns=...("..."), # <- Need to select columns here
         use_subunits=False
     )
 )
 
-gt_tbl
+gt_tbl_5
 ```
 
 `.fmt_percent()`
 
 ```{python}
-gt_tbl = (
-    gt_tbl
+gt_tbl_6 = (
+    gt_tbl_5
     .fmt_percent(
-        columns=cs.ends_with("______"), # <- What string do we use?
+        columns=cs.ends_with("..."), # <- What string do we use?
         decimals=0
     )
 )
 
-gt_tbl
+gt_tbl_6
 ```
 
 ## Styling the Table
@@ -107,43 +105,43 @@ gt_tbl
 `.tab_style()` - 1
 
 ```{python}
-gt_tbl = (
-    gt_tbl
+gt_tbl_7 = (
+    gt_tbl_6
     .tab_style(
         style=style.fill(color="aliceblue"),
-        locations=loc.body(columns=cs.______("revenue")) # <- ?
+        locations=loc.body(columns=...("revenue")) # <- ?
     )
 )
 
-gt_tbl
+gt_tbl_7
 ```
 
 `.tab_style()` - 2
 
 ```{python}
-gt_tbl = (
-    gt_tbl
+gt_tbl_8 = (
+    gt_tbl_7
     .tab_style(
         style=style.______(color="papayawhip"), # <- fn for specifying a fill?
-        locations=loc.body(columns=cs.______("profit")) # <- ?
+        locations=loc.body(columns=...("profit")) # <- ?
     )
 )
 
-gt_tbl
+gt_tbl_8
 ```
 
 `.tab_style()` - 3
 
 ```{python}
-gt_tbl = (
-    gt_tbl
+gt_tbl_9 = (
+    gt_tbl_8
     .tab_style(
         style=style.text(weight="bold"),
-        locations=loc.body(rows=pl.col("product") == "______"), # <- What str?
+        locations=loc.body(rows=pl.col("product") == "..."), # <- What str?
     )
 )
 
-gt_tbl
+gt_tbl_9
 ```
 
 ## Adding a Column of Nanoplots
@@ -151,15 +149,15 @@ gt_tbl
 `.fmt_nanoplot()`
 
 ```{python}
-gt_tbl = (
-    gt_tbl
+gt_tbl_10 = (
+    gt_tbl_9
     .fmt_nanoplot(
         columns="monthly_sales",
         plot_type="bar"
     )
 )
 
-gt_tbl
+gt_tbl_10
 ```
 
 ## Adding Images to the Table
@@ -167,15 +165,15 @@ gt_tbl
 `.fmt_image()`
 
 ```{python}
-gt_tbl = (
-    gt_tbl
+gt_tbl_11 = (
+    gt_tbl_10
     .fmt_image(
         columns="icon",
         path="img/"
     )
 )
 
-gt_tbl
+gt_tbl_11
 ```
 
 ## Making Some Final Tweaks
@@ -183,7 +181,7 @@ gt_tbl
 `.sub_missing()`
 
 ```{python}
-gt_tbl = gt_tbl.sub_missing(missing_text="")
+gt_tbl_12 = gt_tbl_11.sub_missing(missing_text="...") # <- How do we replace with blanks?
 
-gt_tbl
+gt_tbl_12
 ```
