@@ -23,9 +23,9 @@ coffee_sales
 `gt()`
 
 ```{r}
-gt_tbl <- gt(______) # <- what do we introduce to gt()?
+gt_tbl_1 <- gt(coffee_sales) # <- what do we introduce to gt()?
 
-gt_tbl
+gt_tbl_1
 ```
 
 ## Adding Structure to the Table
@@ -33,37 +33,37 @@ gt_tbl
 `tab_header()`
 
 ```{r}
-gt_tbl <- gt_tbl |> tab_header(title = "Sales of Coffee Equipment")
+gt_tbl_2 <- gt_tbl_1 |> tab_header(title = "Sales of Coffee Equipment")
 
-gt_tbl
+gt_tbl_2
 ```
 
 `tab_spanner()`
 
 ```{r}
-gt_tbl <-
-    gt_tbl |>
-    tab_spanner(label = "Revenue", columns = starts_with("revenue")) |>
-    tab_spanner(label = "Profit", columns = starts_with("______")) # <- ?
+# We want two spanners in our table
+gt_tbl_3 <-
+    gt_tbl_2 |>
+    tab_spanner(label = "Revenue", columns = starts_with("revenue"))
+    # tab_spanner(...) # <- ?
 
-gt_tbl
+gt_tbl_3
 ```
 
 `cols_label()`
 
 ```{r}
-gt_tbl <-
-    gt_tbl |>
+# We want to make `icon` blank and re-label all other columns
+gt_tbl_4 <-
+    gt_tbl_3 |>
     cols_label(
-        icon = "______", # <- We want no label above the icon
         product = "Product",
         revenue_dollars = "Amount",
-        profit_dollars = "Amount",
         revenue_pct = "Percent",
-        profit_pct = "Percent"
+        monthly_sales = "Monthly Sales"
     )
 
-gt_tbl
+gt_tbl_4
 ```
 
 ## Formatting Values Within the Table Body
@@ -71,27 +71,27 @@ gt_tbl
 `fmt_currency()`
 
 ```{r}
-gt_tbl <- 
-    gt_tbl |>
+gt_tbl_5 <- 
+    gt_tbl_4 |>
     fmt_currency(
-        columns = ______("______"), # <- Need to select columns here
+        columns = ...("..."), # <- Need to select columns here
         use_subunits = FALSE
     )
 
-gt_tbl
+gt_tbl_5
 ```
 
 `fmt_percent()`
 
 ```{r}
-gt_tbl <-
-    gt_tbl |>
+gt_tbl_6 <-
+    gt_tbl_5 |>
     fmt_percent(
-        columns = ends_with("______"), # <- What string do we use?
+        columns = ends_with("..."), # <- What string do we use?
         decimals = 0
     )
 
-gt_tbl
+gt_tbl_6
 ```
 
 ## Styling the Table
@@ -99,38 +99,40 @@ gt_tbl
 `.tab_style()` - 1
 
 ```{r}
-gt_tbl <-
-    gt_tbl |>
+gt_tbl_7 <-
+    gt_tbl_6 |>
     tab_style(
         style = cell_fill(color = "aliceblue"),
-        locations = cells_body(columns = ______("revenue")) # <- ?
+        locations = cells_body(columns = ...("revenue")) # <- ?
     )
 
-gt_tbl
+gt_tbl_7
 ```
 
 `.tab_style()` - 2
 
 ```{r}
-gt_tbl <-
-    gt_tbl |>
+gt_tbl_8 <-
+    gt_tbl_7 |>
     tab_style(
         style = ______(color = "papayawhip"), # <- fn for specifying a fill?
-        locations = cells_body(columns = ______("profit"))  # <- ?
+        locations = cells_body(columns = ...("profit"))  # <- ?
     )
 
-gt_tbl
+gt_tbl_8
 ```
 
 `.tab_style()` - 3
 
 ```{r}
-gt_tbl <-
-    gt_tbl |>
+gt_tbl_9 <-
+    gt_tbl_8 |>
     tab_style(
         style = cell_text(weight = "bold"),
         locations = cells_body(rows = product == "______") # <- What str?
     )
+
+gt_tbl_9
 ```
 
 ## Adding a Column of Nanoplots
@@ -138,8 +140,8 @@ gt_tbl <-
 `cols_nanoplot()`
 
 ```{r}
-gt_tbl <-
-    gt_tbl |>
+gt_tbl_10 <-
+    gt_tbl_9 |>
     cols_nanoplot(
         columns = monthly_sales, 
         plot_type = "bar",
@@ -147,7 +149,7 @@ gt_tbl <-
         new_col_label = "Monthly Revenue" 
     )
 
-gt_tbl
+gt_tbl_10
 ```
 
 ## Adding Images to the Table
@@ -155,14 +157,14 @@ gt_tbl
 `fmt_image()`
 
 ```{r}
-gt_tbl <-
-    gt_tbl |>
+gt_tbl_11 <-
+    gt_tbl_10 |>
     fmt_image(
         columns = icon,
         path = "img/"
     )
 
-gt_tbl
+gt_tbl_11
 ```
 
 ## Making Some Final Tweaks
@@ -170,7 +172,7 @@ gt_tbl
 `sub_missing()`
 
 ```{r}
-gt_tbl <- gt_tbl |> sub_missing(missing_text = "")
+gt_tbl_12 <- gt_tbl_11 |> sub_missing(missing_text = "...") # <- How do we replace with blanks?
 
-gt_tbl
+gt_tbl_12
 ```
