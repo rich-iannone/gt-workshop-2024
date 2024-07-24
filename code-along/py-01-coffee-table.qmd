@@ -43,7 +43,7 @@ gt_tbl_2
 `.tab_spanner()`
 
 ```{python}
-
+# We want two spanners in our table
 gt_tbl_3 = (
     gt_tbl_2
     .tab_spanner(label="Revenue", columns=cs.starts_with("revenue"))
