@@ -115,7 +115,7 @@ gt_tbl_7
 gt_tbl_8 <-
     gt_tbl_7 |>
     tab_style(
-        style = ______(color = "papayawhip"), # <- fn for specifying a fill?
+        style = ...(color = "papayawhip"), # <- fn for specifying a fill?
         locations = cells_body(columns = ...("profit"))  # <- ?
     )
 
@@ -129,7 +129,7 @@ gt_tbl_9 <-
     gt_tbl_8 |>
     tab_style(
         style = cell_text(weight = "bold"),
-        locations = cells_body(rows = product == "______") # <- What str?
+        locations = cells_body(rows = product == "...") # <- What str?
     )
 
 gt_tbl_9
