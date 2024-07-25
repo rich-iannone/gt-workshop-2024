@@ -25,9 +25,9 @@ power_generation
 `gt()`
 
 ```{r}
-gt_tbl <- gt(power_generation)
+gt_tbl_1 <- gt(power_generation)
 
-gt_tbl
+gt_tbl_1
 ```
 
 ## Adding Structure to the Table
@@ -35,20 +35,20 @@ gt_tbl
 `tab_header()` + `md()`
 
 ```{r}
-gt_tbl <-
-    gt_tbl |>
+gt_tbl_2 <-
+    gt_tbl_1 |>
     tab_header(
         title = md("2023 Mean **Carbon Intensity** (gCO2eq/kWh) and **Power Consumption** Breakdown (%)")
     )
 
-gt_tbl
+gt_tbl_2
 ```
 
 `tab_source_note()` + `md()`
 
 ```{r}
-gt_tbl <-
-    gt_tbl |>
+gt_tbl_3 <-
+    gt_tbl_2 |>
     tab_source_note(
         md("
 <br><div style=\"text-align: left;\">
@@ -62,20 +62,20 @@ based on more accurate regional factors.
         )
     )
 
-gt_tbl
+gt_tbl_3
 ```
 
 `cols_width()`
 
 ```{r}
-gt_tbl <-
-    gt_tbl |>
+gt_tbl_4 <-
+    gt_tbl_3 |>
     cols_width(
         Zone ~ "120px",
         everything() ~ "85px"
     ) 
 
-gt_tbl
+gt_tbl_4
 ```
 
 ## Formatting Values Within the Table Body
@@ -83,22 +83,22 @@ gt_tbl
 `fmt_percent()`
 
 ```{r}
-gt_tbl <-
-    gt_tbl |>
+gt_tbl_5 <-
+    gt_tbl_4 |>
     fmt_percent(
         columns = -`CO2 Intensity`,
         decimals = 1
     )
 
-gt_tbl
+gt_tbl_5
 ```
 
 `fmt_integer()`
 
 ```{r}
-gt_tbl <- gt_tbl |> fmt_integer(columns=`CO2 Intensity`)
+gt_tbl_6 <- gt_tbl_5 |> fmt_integer(columns=`CO2 Intensity`)
 
-gt_tbl
+gt_tbl_6
 ```
 
 ## Styling the Table
@@ -106,8 +106,8 @@ gt_tbl
 `data_color()` - 1
 
 ```{r}
-gt_tbl <-
-    gt_tbl |>
+gt_tbl_7 <-
+    gt_tbl_6 |>
     data_color(
         columns = `CO2 Intensity`,
         palette = c(
@@ -118,14 +118,14 @@ gt_tbl <-
         domain = c(0, 900)
     )
 
-gt_tbl
+gt_tbl_7
 ```
 
 `data_color()` - 2
 
 ```{r}
-gt_tbl <-
-    gt_tbl |>
+gt_tbl_8 <-
+    gt_tbl_7 |>
     data_color(
         columns = c(Hydro, Nuclear, Wind, Solar, Geothermal),
         palette = c("#00A600", "chartreuse3", "chartreuse4", "snow"),
@@ -133,28 +133,28 @@ gt_tbl <-
         reverse = TRUE
     )
 
-gt_tbl
+gt_tbl_8
 ```
 
 `data_color()` - 3
 
 ```{r}
-gt_tbl <-
-    gt_tbl |>
+gt_tbl_9 <-
+    gt_tbl_8 |>
     data_color(
         columns = Biomass,
         palette = c("snow", "#EEC900", "#E8C32E", "#D69C4E"),
         domain = c(0, 0.3)
   )
 
-gt_tbl
+gt_tbl_9
 ```
 
 `data_color()` - 4
 
 ```{r}
-gt_tbl <-
-    gt_tbl |>
+gt_tbl_10 <-
+    gt_tbl_9 |>
     data_color(
         columns = Gas:Oil,
         palette = c("tomato4", "sienna4", "#D69C4E", "#Dc863B", "snow"),
@@ -162,20 +162,20 @@ gt_tbl <-
         reverse = TRUE
     )
 
-gt_tbl
+gt_tbl_10
 ```
 
 `tab_style()`
 
 ```{r}
-gt_tbl <-
-    gt_tbl |>
+gt_tbl_11 <-
+    gt_tbl_10 |>
     tab_style(
         style = cell_fill(color = "snow"),
         locations = cells_body(columns = c(Zone, Unknown:`Battery Discharge`))
     )
 
-gt_tbl
+gt_tbl_11
 ```
 
 ## Making Some Final Tweaks
@@ -183,25 +183,25 @@ gt_tbl
 `cols_align()` - 1
 
 ```{r}
-gt_tbl <- gt_tbl |> cols_align(align = "center")
+gt_tbl_12 <- gt_tbl_11 |> cols_align(align = "center")
 
-gt_tbl
+gt_tbl_12
 ```
 
 `cols_align()` - 2
 
 ```{r}
-gt_tbl <- gt_tbl |> cols_align(align = "left", columns = Zone)
+gt_tbl_13 <- gt_tbl_12 |> cols_align(align = "left", columns = Zone)
 
-gt_tbl
+gt_tbl_13
 ```
 
 `opt_table_font()`
 
 ```{r}
-gt_tbl <- gt_tbl |> opt_table_font(stack = "humanist")
+gt_tbl_14 <- gt_tbl_13 |> opt_table_font(stack = "humanist")
 
-gt_tbl
+gt_tbl_14
 ```
 
 `tab_options()`
