@@ -178,7 +178,7 @@ gt_tbl_11 = (
 gt_tbl_11
 ```
 
-## Making Some Final Tweaks
+## Making a Final Tweak
 
 `.sub_missing()`
 
