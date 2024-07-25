@@ -41,9 +41,9 @@ reactions_mini
 `GT()`
 
 ```{python}
-gt_tbl = GT(______, rowname_col="cmpd_name") # <- what do we introduce to GT()?
+gt_tbl_1 = GT(______, rowname_col="cmpd_name") # <- what do we introduce to GT()?
 
-gt_tbl
+gt_tbl_1
 ```
 
 ## Adding Structure to the Table
@@ -51,32 +51,32 @@ gt_tbl
 `.tab_header()`
 
 ```{python}
-gt_tbl = gt_tbl.tab_header(
+gt_tbl_2 = gt_tbl_1.tab_header(
     title=md("Gas-phase reactions of selected **mercaptan** compounds")
 )
 
-gt_tbl
+gt_tbl_2
 ```
 
 `.tab_spanner()`
 
 ```{python}
-gt_tbl = (
-    gt_tbl
+gt_tbl_3 = (
+    gt_tbl_2
     .tab_spanner(
         columns=cs.ends_with("______"), # <- which columns have the numerical data?
         label="Reaction Rate Constant (298 K),<br>{{cm^3 molecules^–1 s^–1}}"
     )
 )
 
-gt_tbl
+gt_tbl_3
 ```
 
 `.cols_label()`
 
 ```{python}
-gt_tbl = (
-    gt_tbl
+gt_tbl_4 = (
+    gt_tbl_3
     .cols_label(
         cmpd_formula="",
         OH_k298="OH",
@@ -85,7 +85,7 @@ gt_tbl = (
     )
 )
 
-gt_tbl
+gt_tbl_4
 ```
 
 ## Formatting Values Within the Table Body
@@ -93,17 +93,17 @@ gt_tbl
 `.fmt_units()`
 
 ```{python}
-gt_tbl = gt_tbl.fmt_units(columns="______")  # <- which column has chem stuff?
+gt_tbl_5 = gt_tbl_4.fmt_units(columns="______")  # <- which column has chem stuff?
 
-gt_tbl
+gt_tbl_5
 ```
 
 `.fmt_scientific()`
 
 ```{python}
-gt_tbl = gt_tbl.fmt_scientific(columns=cs.ends_with("______")) # <- ?
+gt_tbl_6 = gt_tbl_5.fmt_scientific(columns=cs.ends_with("______")) # <- ?
 
-gt_tbl
+gt_tbl_6
 ```
 
 ## Styling the Table
@@ -111,9 +111,9 @@ gt_tbl
 `.opt_stylize()`
 
 ```{python}
-gt_tbl = gt_tbl.opt_stylize(style=1, color="blue")
+gt_tbl_7 = gt_tbl_6.opt_stylize(style=1, color="blue")
 
-gt_tbl
+gt_tbl_7
 ```
 
 ## Making Some Final Tweaks
@@ -121,31 +121,31 @@ gt_tbl
 `.sub_missing()`
 
 ```{python}
-gt_tbl = gt_tbl.sub_missing()
+gt_tbl_8 = gt_tbl_7.sub_missing()
 
-gt_tbl
+gt_tbl_8
 ```
 
 `.cols_hide()`
 
 ```{python}
-gt_tbl = gt_tbl.cols_hide(columns="______") # <- which column has nothing?
+gt_tbl_9 = gt_tbl_8.cols_hide(columns="______") # <- which column has nothing?
 
-gt_tbl
+gt_tbl_9
 ```
 
 `.opt_table_font()`
 
 ```{python}
-gt_tbl = gt_tbl.opt_table_font(stack="humanist")
+gt_tbl_10 = gt_tbl_9.opt_table_font(stack="humanist")
 
-gt_tbl
+gt_tbl_10
 ```
 
 `.opt_horizontal_padding()`
 
 ```{python}
-gt_tbl = gt_tbl.opt_horizontal_padding(scale=3)
+gt_tbl_11 = gt_tbl_10.opt_horizontal_padding(scale=3)
 
-gt_tbl
+gt_tbl_11
 ```
