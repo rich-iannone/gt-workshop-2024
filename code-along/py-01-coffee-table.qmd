@@ -6,6 +6,8 @@ jupyter: python3
 
 # Code Along in Python: Coffee Table
 
+## Start
+
 Setting up.
 
 ```{python}
