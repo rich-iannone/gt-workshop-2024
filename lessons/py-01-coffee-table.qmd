@@ -6,6 +6,8 @@ jupyter: python3
 
 # Coffee Table: Great Tables
 
+## Start
+
 For this lesson we are going to make a complete table using data in the
 `"coffee-sales.json"` file. Though there are lots of datasets available in the
 Great Tables package, this is not one of them. We'll import the data using
