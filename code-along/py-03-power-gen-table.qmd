@@ -6,6 +6,8 @@ jupyter: python3
 
 # Code Along in Python: Power Generation Table
 
+## Start
+
 Setting up.
 
 ```{python}
