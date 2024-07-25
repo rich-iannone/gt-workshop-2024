@@ -5,6 +5,8 @@ html-table-processing: none
 
 # Code Along in R: Coffee Table
 
+## Start
+
 Setting up.
 
 ```{r}
