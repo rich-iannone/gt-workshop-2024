@@ -5,6 +5,8 @@ html-table-processing: none
 
 # Reactions Table: gt
 
+## Start
+
 In this lesson we are going to make a complete table using the `reactions`
 dataset available in the gt package. Let's first ensure that gt and tidyverse
 are both loaded:
