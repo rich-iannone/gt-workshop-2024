@@ -5,6 +5,8 @@ html-table-processing: none
 
 # Coffee Table: gt
 
+## Start
+
 For this lesson we are going to make a complete table using the `coffee_sales`
 dataset. Though there are lots of datasets available in the gt package, this is
 not one of them. We'll import the CSV data as a tibble object.
@@ -30,9 +32,9 @@ tibble to the `gt()` function. We'll assign this to `gt_tbl` and print the table
 to the viewer:
 
 ```{r}
-gt_tbl <- gt(coffee_sales)
+gt_tbl_1 <- gt(coffee_sales)
 
-gt_tbl
+gt_tbl_1
 ```
 
 In the viewer we see the HTML table! It's not at all presentable but it has
@@ -47,9 +49,9 @@ arguments: (1) `title` and (2) `subtitle`. We'll just use `title` for this
 table.
 
 ```{r}
-gt_tbl <- gt_tbl |> tab_header(title = "Sales of Coffee Equipment")
+gt_tbl_2 <- gt_tbl_1 |> tab_header(title = "Sales of Coffee Equipment")
 
-gt_tbl
+gt_tbl_2
 ```
 
 It's now time to add spanners over some of the columns. Spanners are useful for
@@ -58,12 +60,12 @@ first use the select helpers. In this case, we'll use `starts_with()` to target
 columns within each use of `tab_spanner()`.
 
 ```{r}
-gt_tbl <-
-    gt_tbl |>
+gt_tbl_3 <-
+    gt_tbl_2 |>
     tab_spanner(label = "Revenue", columns = starts_with("revenue")) |>
     tab_spanner(label = "Profit", columns = starts_with("profit"))
 
-gt_tbl
+gt_tbl_3
 ```
 
 So long as the columns are named systematically, the combination of a select
@@ -76,8 +78,8 @@ from the column names of the input tibble. Instead, we'll use `cols_label()`
 to re-label all of the column labels.
 
 ```{r}
-gt_tbl <-
-    gt_tbl |>
+gt_tbl_4 <-
+    gt_tbl_3 |>
     cols_label(
         icon = "",
         product = "Product",
@@ -87,7 +89,7 @@ gt_tbl <-
         profit_pct = "Percent"
     )
 
-gt_tbl
+gt_tbl_4
 ```
 
 ## Formatting Values Within the Table Body
@@ -96,14 +98,14 @@ The gt package comes with a variety of formatting functions. All of them are of
 the form: `fmt_*()` and they're meant to format values in the table body.
 
 ```{r}
-gt_tbl <- 
-    gt_tbl |>
+gt_tbl_5 <- 
+    gt_tbl_4 |>
     fmt_currency(
         columns = ends_with("dollars"),
         use_subunits = FALSE
     )
 
-gt_tbl
+gt_tbl_5
 ```
 
 We've formatted the revenue values and that's good. But we also have fractional
@@ -113,14 +115,14 @@ we have to target the correct columns and we'd prefer to see no decimal values
 in the formatted output.
 
 ```{r}
-gt_tbl <-
-    gt_tbl |>
+gt_tbl_6 <-
+    gt_tbl_5 |>
     fmt_percent(
         columns = ends_with("pct"),
         decimals = 0
     )
 
-gt_tbl
+gt_tbl_6
 ```
 
 This formatting looks great! Much better than without the formatting in place
@@ -156,14 +158,14 @@ Okay, let's now color fill those cells dealing with revenue. The color will be
 `"aliceblue"`:
 
 ```{r}
-gt_tbl <-
-    gt_tbl |>
+gt_tbl_7 <-
+    gt_tbl_6 |>
     tab_style(
         style = cell_fill(color = "aliceblue"),
         locations = cells_body(columns = starts_with("revenue"))
     )
 
-gt_tbl
+gt_tbl_7
 ```
 
 Alright! Those cells now have a nice, light-blue color.
@@ -172,14 +174,14 @@ Now, let's do pretty much the same thing, except with the columns dealing with
 profit. The color fill to use will be `"papayawhip"` here:
 
 ```{r}
-gt_tbl <-
-    gt_tbl |>
+gt_tbl_8 <-
+    gt_tbl_7 |>
     tab_style(
         style = cell_fill(color = "papayawhip"),
         locations = cells_body(columns = starts_with("profit"))
     )
 
-gt_tbl
+gt_tbl_8
 ```
 
 Excellent. There is now much color within the table, thanks to `tab_style()`.
@@ -190,12 +192,14 @@ target the entire row in `cells_body()`. We'll use `cell_text(weight = "bold")`
 to achieve a bolded text look in the row. 
 
 ```{r}
-gt_tbl <-
-    gt_tbl |>
+gt_tbl_9 <-
+    gt_tbl_8 |>
     tab_style(
         style = cell_text(weight = "bold"),
         locations = cells_body(rows = product == "Total")
     )
+
+gt_tbl_9
 ```
 
 To get that done we used an R expression. This one:
@@ -216,8 +220,8 @@ function can take a generate a column of nanoplots. The default `plot_type` is
 do it:
 
 ```{r}
-gt_tbl <-
-    gt_tbl |>
+gt_tbl_10 <-
+    gt_tbl_9 |>
     cols_nanoplot(
         columns = monthly_sales, 
         plot_type = "bar",
@@ -225,7 +229,7 @@ gt_tbl <-
         new_col_label = "Monthly Revenue" 
     )
 
-gt_tbl
+gt_tbl_10
 ```
 
 Try interacting with the nanoplots in the viewer. Note that hovering over any of
@@ -243,20 +247,20 @@ they are inserted as Base64-encoded images (makes it all self-contained and
 portable). In our table, the column to use this on is the `icon` column:
 
 ```{r}
-gt_tbl <-
-    gt_tbl |>
+gt_tbl_11 <-
+    gt_tbl_10 |>
     fmt_image(
         columns = icon,
         path = "img/"
     )
 
-gt_tbl
+gt_tbl_11
 ```
 
 Now we have icons in that column, making the table that much more easier to scan
 for sales/profit data.
 
-## Making Some Final Tweaks
+## Making a Final Tweak
 
 There's a missing value in the table and it appears as the text `"NA"`. We don't
 want that in the final table. There's a function dedicated to replacing missing
@@ -265,7 +269,7 @@ argument but, by default, the function targets *all columns*. Here, we will
 replace `"NA"` such that we get an empty cell.
 
 ```{r}
-gt_tbl <- gt_tbl |> sub_missing(missing_text = "")
+gt_tbl_12 <- gt_tbl_11 |> sub_missing(missing_text = "")
 
-gt_tbl
+gt_tbl_12
 ```
