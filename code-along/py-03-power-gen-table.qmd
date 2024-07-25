@@ -26,9 +26,9 @@ power_generation
 `GT()`
 
 ```{python}
-gt_tbl = GT(power_generation)
+gt_tbl_1 = GT(power_generation)
 
-gt_tbl
+gt_tbl_1
 ```
 
 ## Adding Structure to the Table
@@ -36,21 +36,21 @@ gt_tbl
 `.tab_header()` + `md()`
 
 ```{python}
-gt_tbl = (
-    gt_tbl
+gt_tbl_2 = (
+    gt_tbl_1
     .tab_header(
         title=md("2023 Mean **Carbon Intensity** (gCO2eq/kWh) and **Power Consumption** Breakdown (%)")
     )
 )
 
-gt_tbl
+gt_tbl_2
 ```
 
 `.tab_source_note()` + `md()`
 
 ```{python}
-gt_tbl = (
-    gt_tbl
+gt_tbl_3 = (
+    gt_tbl_2
     .tab_source_note(
         md(
             '<br><div style="text-align: left;">'
@@ -64,35 +64,35 @@ gt_tbl = (
     )
 )
 
-gt_tbl
+gt_tbl_3
 ```
 
 `.cols_width()`
 
 ```{python}
-gt_tbl = (
-    gt_tbl
+gt_tbl_4 = (
+    gt_tbl_3
     .cols_width(
         {
-            "Zone": "80px",
-            "CO2 Intensity": "62px",
-            "Hydro": "62px",
-            "Nuclear": "62px",
-            "Wind": "62px",
-            "Solar": "62px",
-            "Geothermal": "62px",
-            "Biomass": "62px",
-            "Gas": "62px",
-            "Coal": "62px",
-            "Oil": "62px",
-            "Unknown": "62px",
-            "Hydro Discharge": "62px",
-            "Battery Discharge": "62px"
+            "Zone": "120px",
+            "CO2 Intensity": "85px",
+            "Hydro": "85px",
+            "Nuclear": "85px",
+            "Wind": "85px",
+            "Solar": "85px",
+            "Geothermal": "85px",
+            "Biomass": "85px",
+            "Gas": "85px",
+            "Coal": "85px",
+            "Oil": "85px",
+            "Unknown": "85px",
+            "Hydro Discharge": "85px",
+            "Battery Discharge": "85px"
         }
     ) 
 )
 
-gt_tbl
+gt_tbl_4
 ```
 
 ## Formatting Values Within the Table Body
@@ -100,8 +100,8 @@ gt_tbl
 `.fmt_percent()`
 
 ```{python}
-gt_tbl = (
-    gt_tbl
+gt_tbl_5 = (
+    gt_tbl_4
     .fmt_percent(
         columns=[
             "Hydro", "Nuclear", "Wind", "Solar", "Geothermal",
@@ -112,15 +112,15 @@ gt_tbl = (
     )
 )
 
-gt_tbl
+gt_tbl_5
 ```
 
 `.fmt_integer()`
 
 ```{python}
-gt_tbl = gt_tbl.fmt_integer(columns="CO2 Intensity")
+gt_tbl_6 = gt_tbl_5.fmt_integer(columns="CO2 Intensity")
 
-gt_tbl
+gt_tbl_6
 ```
 
 ## Styling the Table
@@ -128,27 +128,27 @@ gt_tbl
 `.data_color()` - 1
 
 ```{python}
-gt_tbl = (
-    gt_tbl
+gt_tbl_7 = (
+    gt_tbl_6
     .data_color(
         columns="CO2 Intensity",
         palette=[
             "#00A600", "#E6E600", "#E8C32E",
             "#D69C4E", "#Dc863B", "sienna",
             "sienna4", "tomato4", "brown"
-            ],
+        ],
         domain=[0, 900]
     )
 )
 
-gt_tbl
+gt_tbl_7
 ```
 
 `.data_color()` - 2
 
 ```{python}
-gt_tbl = (
-    gt_tbl
+gt_tbl_8 = (
+    gt_tbl_7
     .data_color(
         columns=["Hydro", "Nuclear", "Wind", "Solar", "Geothermal"],
         palette=["#00A600", "chartreuse3", "chartreuse4", "snow"][::-1],
@@ -156,14 +156,14 @@ gt_tbl = (
     )
 )
 
-gt_tbl
+gt_tbl_8
 ```
 
 `.data_color()` - 3
 
 ```{python}
-gt_tbl = (
-    gt_tbl
+gt_tbl_9 = (
+    gt_tbl_8
     .data_color(
         columns="Biomass",
         palette=["snow", "#EEC900", "#E8C32E", "#D69C4E"],
@@ -171,14 +171,14 @@ gt_tbl = (
     )
 )
 
-gt_tbl
+gt_tbl_9
 ```
 
 `.data_color()` - 4
 
 ```{python}
-gt_tbl = (
-    gt_tbl
+gt_tbl_10 = (
+    gt_tbl_9
     .data_color(
         columns=["Gas", "Coal", "Oil"],
         palette=["tomato4", "sienna4", "#D69C4E", "#Dc863B", "snow"][::-1],
@@ -186,14 +186,14 @@ gt_tbl = (
     )
 )
 
-gt_tbl
+gt_tbl_10
 ```
 
 `.data_color()` - 5
 
 ```{python}
-gt_tbl = (
-    gt_tbl
+gt_tbl_11 = (
+    gt_tbl_10
     .data_color(
         columns=[
             "Zone", "Unknown", "Hydro Discharge", "Battery Discharge"
@@ -202,7 +202,7 @@ gt_tbl = (
     )
 )
 
-gt_tbl
+gt_tbl_11
 ```
 
 ## Making Some Final Tweaks
@@ -210,32 +210,32 @@ gt_tbl
 `.cols_align()` - 1
 
 ```{python}
-gt_tbl = gt_tbl.cols_align(align="center")
+gt_tbl_12 = gt_tbl_11.cols_align(align="center")
 
-gt_tbl
+gt_tbl_12
 ```
 
 `.cols_align()` - 2
 
 ```{python}
-gt_tbl = gt_tbl.cols_align(align="left", columns="Zone")
+gt_tbl_13 = gt_tbl_12.cols_align(align="left", columns="Zone")
 
-gt_tbl
+gt_tbl_13
 ```
 
 `.opt_table_font()`
 
 ```{python}
-gt_tbl = gt_tbl.opt_table_font(stack="humanist")
+gt_tbl_14 = gt_tbl_13.opt_table_font(stack="humanist")
 
-gt_tbl
+gt_tbl_14
 ```
 
 `.tab_options()`
 
 ```{python}
-gt_tbl = (
-    gt_tbl
+gt_tbl_15 = (
+    gt_tbl_14
     .tab_options(
         source_notes_font_size="x-small",
         source_notes_padding="3px",
@@ -249,5 +249,5 @@ gt_tbl = (
     )
 )
 
-gt_tbl
+gt_tbl_15
 ```
