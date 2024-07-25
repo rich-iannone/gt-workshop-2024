@@ -5,6 +5,8 @@ html-table-processing: none
 
 # Code Along in R: Power Generation Table
 
+## Start
+
 Setting up.
 
 ```{r}
