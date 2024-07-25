@@ -86,6 +86,25 @@ individual units. The caret character `"^"` followed by the numeric value (e.g.,
 `"s^-1"`) indicates that these exponent values should be rendered as superscript
 numerals.
 
+Now, we will replace the column labels with better labels for display purposes.
+Usually, you'll never want to keep the original labels since they're derived
+from the column names of the input tibble. Instead, we'll use `cols_label()` to
+re-label all of the column labels.
+
+```{r}
+gt_tbl_4 <-
+    gt_tbl_3 |>
+    cols_label(
+        cmpd_formula = "",
+        OH_k298 = "OH",
+        NO3_k298 = "{{%NO3%}}",
+        Cl_k298 = "Cl",
+    )
+
+gt_tbl_4
+```
+
+
 ## Formatting Values Within the Table Body
 
 Units notation can have a sub-notation called chemistry notation. That is
@@ -96,9 +115,9 @@ characters either. The `fmt_chem()` function will interpret the text values as
 being in chemistry notation.
 
 ```{r}
-gt_tbl_4 <- gt_tbl_3 |> fmt_chem(columns = "cmpd_formula")
+gt_tbl_5 <- gt_tbl_4 |> fmt_chem(columns = "cmpd_formula")
 
-gt_tbl_4
+gt_tbl_5
 ```
 
 The unformatted values in the `*k298` columns would present much better when
@@ -107,9 +126,9 @@ function. Here, we use `ends_with("k298")` to target all of the relevant columns
 by a common part of their column names.
 
 ```{r}
-gt_tbl_5 <- gt_tbl_4 |> fmt_scientific(columns = ends_with("k298"))
+gt_tbl_6 <- gt_tbl_5 |> fmt_scientific(columns = ends_with("k298"))
 
-gt_tbl_5
+gt_tbl_6
 ```
 
 It makes sense to have these values in scientific notation because readers are
@@ -130,9 +149,9 @@ arguments here:
 Let's go with `style = 1` and `color = "blue"`
 
 ```{r}
-gt_tbl_6 <- gt_tbl_5 |> opt_stylize(style = 1, color = "blue")
+gt_tbl_7 <- gt_tbl_6 |> opt_stylize(style = 1, color = "blue")
 
-gt_tbl_6
+gt_tbl_7
 ```
 
 There are 36 combinations of `style` and `color` so play around with them and
@@ -147,9 +166,9 @@ to do the simplest thing: just call the `sub_missing()` function with its
 defaults:
 
 ```{r}
-gt_tbl_7 <- gt_tbl_6 |> sub_missing()
+gt_tbl_8 <- gt_tbl_7 |> sub_missing()
 
-gt_tbl_7
+gt_tbl_8
 ```
 
 Note that all missing values in all columns are replaced (i.e., we didn't have
@@ -164,37 +183,15 @@ final presentation by using the `cols_hide()` function. Let's do that here and
 specify only that column in `columns`:
 
 ```{r}
-gt_tbl_8 <- gt_tbl_7 |> cols_hide(columns = "O3_k298")
+gt_tbl_9 <- gt_tbl_8 |> cols_hide(columns = "O3_k298")
 
-gt_tbl_8
+gt_tbl_9
 ```
 
 The `O3_k298` column is no longer visible in the table. The useful thing about
 `cols_hide()` is that we can have column values that may have useful data for
 expressions (i.e., good and convenient for building the table) but their values
 may not be useful for the finalized table display.
-
-Now, we will replace the column labels with better labels for display purposes.
-Usually, you'll never want to keep the original labels since they're derived
-from the column names of the input tibble. Instead, we'll use `cols_label()` to
-re-label all of the column labels.
-
-```{r}
-gt_tbl_9 <-
-    gt_tbl_8 |>
-    cols_label(
-        cmpd_formula = "",
-        OH_k298 = "OH",
-        NO3_k298 = "{{%NO3%}}",
-        Cl_k298 = "Cl",
-    )
-
-gt_tbl_9
-```
-
-We could have always used `cols_label()` much earlier. Again, it's easier to
-iterate on the table when you can see the original column names in the HTML
-table.
 
 The default set of fonts for the table (*set* because of multi-platform
 considerations) is pleasant but sometimes having something different desirable.
