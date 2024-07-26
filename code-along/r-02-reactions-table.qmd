@@ -70,8 +70,9 @@ gt_tbl_4 <-
     cols_label(
         cmpd_formula = "",
         OH_k298 = "OH",
+        O3_k298 = "{{%O3%}}",
         NO3_k298 = "{{%NO3%}}",
-        Cl_k298 = "Cl",
+        Cl_k298 = "______"
     )
 
 gt_tbl_4
