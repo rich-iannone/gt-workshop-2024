@@ -96,33 +96,33 @@ gt_tbl_6 <- gt_tbl_5 |> fmt_scientific(columns = ends_with("______")) # <- ?
 gt_tbl_6
 ```
 
-## Styling the Table
-
-`opt_stylize()`
-
-```{r}
-gt_tbl_7 <- gt_tbl_6 |> opt_stylize(style = 1, color = "blue")
-
-gt_tbl_7
-```
-
-## Making Some Final Tweaks
-
 `sub_missing()`
 
 ```{r}
-gt_tbl_8 <- gt_tbl_7 |> sub_missing()
+gt_tbl_7 <- gt_tbl_6 |> sub_missing()
 
-gt_tbl_8
+gt_tbl_7
 ```
 
 `cols_hide()`
 
 ```{r}
-gt_tbl_9 <- gt_tbl_8 |> cols_hide(columns = "______") # <- which column has nothing?
+gt_tbl_8 <- gt_tbl_7 |> cols_hide(columns = "______") # <- which column has nothing?
+
+gt_tbl_8
+```
+
+## Styling the Table
+
+`opt_stylize()`
+
+```{r}
+gt_tbl_9 <- gt_tbl_8 |> opt_stylize(style = 1, color = "blue")
 
 gt_tbl_9
 ```
+
+## Making Some Final Tweaks
 
 `opt_table_font()`
 
