@@ -207,8 +207,8 @@ gt_tbl_14
 `tab_options()`
 
 ```{r}
-gt_tbl <-
-    gt_tbl |>
+gt_tbl_15 <-
+    gt_tbl_14 |>
     tab_options(
         source_notes.font.size = "x-small",
         source_notes.padding = "3px",
@@ -221,5 +221,5 @@ gt_tbl <-
         column_labels.padding.horizontal = "0px"
     )
 
-gt_tbl
+gt_tbl_15
 ```
