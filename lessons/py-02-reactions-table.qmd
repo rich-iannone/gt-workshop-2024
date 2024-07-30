@@ -154,39 +154,15 @@ It makes sense to have these values in scientific notation because readers are
 used to seeing such values represented that way. It makes comparing your values
 to other values in the literature that much easier.
 
-## Styling the Table
-
-We can style the table using specific options within the `.tab_options()` method
-but it can be easier to start with `.opt_stylize()` since it will systematically
-theme your entire table with a simple call. There are two arguments here:
-
-- `style=`: choose a numbered style from `1` to `6`
-- `color=`: a base color, options are `"blue"`, `"cyan"`, `"pink"`, `"green"`,
-`"red"`, and `"gray"`
-
-Let's go with `style=1` and `color="blue"`
-
-```{python}
-gt_tbl_7 = gt_tbl_6.opt_stylize(style=1, color="blue")
-
-gt_tbl_7
-```
-
-There are 36 combinations of `style=` and `color=` so play around with them and
-see what looks good to you. Also, you can further modify the appearance of the
-table by using `.tab_options()` or `.tab_style()`.
-
-## Making Some Final Tweaks
-
 There is an abundance of missing values in the table (the `"None"` values). We
 can substitute the text of these cells with alternative text. Here, we are going
 to do the simplest thing: just call the `.sub_missing()` method with its
 defaults:
 
 ```{python}
-gt_tbl_8 = gt_tbl_7.sub_missing()
+gt_tbl_7 = gt_tbl_6.sub_missing()
 
-gt_tbl_8
+gt_tbl_7
 ```
 
 Note that all missing values in all columns are replaced (i.e., we didn't have
@@ -201,15 +177,39 @@ final presentation by using the `.cols_hide()` method. Let's do that here and
 specify only that column in `columns=`:
 
 ```{python}
-gt_tbl_9 = gt_tbl_8.cols_hide(columns="O3_k298")
+gt_tbl_8 = gt_tbl_7.cols_hide(columns="O3_k298")
 
-gt_tbl_9
+gt_tbl_8
 ```
 
 The `O3_k298` column is no longer visible in the table. The useful thing about
 `.cols_hide()` is that we can have column values that may have useful data for
 expressions (i.e., good and convenient for building the table) but their values
 may not be useful for the finalized table display.
+
+## Styling the Table
+
+We can style the table using specific options within the `.tab_options()` method
+but it can be easier to start with `.opt_stylize()` since it will systematically
+theme your entire table with a simple call. There are two arguments here:
+
+- `style=`: choose a numbered style from `1` to `6`
+- `color=`: a base color, options are `"blue"`, `"cyan"`, `"pink"`, `"green"`,
+`"red"`, and `"gray"`
+
+Let's go with `style=1` and `color="blue"`
+
+```{python}
+gt_tbl_9 = gt_tbl_8.opt_stylize(style=1, color="blue")
+
+gt_tbl_9
+```
+
+There are 36 combinations of `style=` and `color=` so play around with them and
+see what looks good to you. Also, you can further modify the appearance of the
+table by using `.tab_options()` or `.tab_style()`.
+
+## Making Some Final Tweaks
 
 The default set of fonts for the table (*set* because of multi-platform
 considerations) is pleasant but sometimes having something different desirable.
