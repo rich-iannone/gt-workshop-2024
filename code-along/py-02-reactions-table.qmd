@@ -38,115 +38,120 @@ reactions_mini = (
 reactions_mini
 ```
 
-`GT()`
+Let's get the data into Great Tables. Plus let's make a stub.
 
 ```{python}
-gt_tbl_1 = GT(______, rowname_col="cmpd_name") # <- what do we introduce to GT()?
+gt_tbl_1 = # 
 
 gt_tbl_1
 ```
 
 ## Adding Structure to the Table
 
-`.tab_header()`
+Add a title to the table to explain contents.
 
 ```{python}
-gt_tbl_2 = gt_tbl_1.tab_header(
-    title=md("Gas-phase reactions of selected **mercaptan** compounds")
-)
+gt_tbl_2 = # (
+    #gt_tbl_1
+#)
 
 gt_tbl_2
 ```
 
-`.tab_spanner()`
+Group numerical columns with a spanner. Use this for the label:
+`"Reaction Rate Constant (298 K),<br>{{cm^3 molecules^–1 s^–1}}"`
 
 ```{python}
-gt_tbl_3 = (
-    gt_tbl_2
-    .tab_spanner(
-        columns=cs.ends_with("______"), # <- which columns have the numerical data?
-        label="Reaction Rate Constant (298 K),<br>{{cm^3 molecules^–1 s^–1}}"
-    )
-)
+gt_tbl_3 = # (
+    # gt_tbl_2
+#)
 
 gt_tbl_3
 ```
 
-`.cols_label()`
+Change Column labels for readability. The column names are:
+`cmpd_formula`, `OH_k298`, `O3_k298`, `NO3_k298`, and `Cl_k298`.
 
 ```{python}
-gt_tbl_4 = (
-    gt_tbl_3
-    .cols_label(
-        cmpd_formula="",
-        OH_k298="OH",
-        O3_k298="{{%O3%}}",
-        NO3_k298="{{%NO3%}}",
-        Cl_k298="______"
-    )
-)
+gt_tbl_4 = # (
+    # gt_tbl_3
+#)
 
 gt_tbl_4
 ```
 
 ## Formatting Values Within the Table Body
 
-`.fmt_units()`
+Format the chemical formulas to make them look better.
 
 ```{python}
-gt_tbl_5 = gt_tbl_4.fmt_units(columns="______")  # <- which column has chem stuff?
+gt_tbl_5 = # (
+    # gt_tbl_4
+#)
 
 gt_tbl_5
 ```
 
-`.fmt_scientific()`
+Format the numeric values.
 
 ```{python}
-gt_tbl_6 = gt_tbl_5.fmt_scientific(columns=cs.ends_with("______")) # <- ?
+gt_tbl_6 = # (
+    # gt_tbl_5
+#)
 
 gt_tbl_6
 ```
 
-`.sub_missing()`
+Replace the `None` values.
 
 ```{python}
-gt_tbl_7 = gt_tbl_6.sub_missing()
+gt_tbl_7 = # (
+    # gt_tbl_6
+#)
 
 gt_tbl_7
 ```
 
-`.cols_hide()`
+Hide redundant columns.
 
 ```{python}
-gt_tbl_8 = gt_tbl_7.cols_hide(columns="______") # <- which column has nothing?
+gt_tbl_8 = # (
+    # gt_tbl_7
+#)
 
 gt_tbl_8
 ```
 
 ## Styling the Table
 
-`.opt_stylize()`
+Use theming to style quickly.
 
 ```{python}
-gt_tbl_9 = gt_tbl_8.opt_stylize(style=1, color="blue")
+gt_tbl_9 = # (
+    # gt_tbl_8
+#)
 
 gt_tbl_9
 ```
 
 ## Making Some Final Tweaks
 
-`.opt_table_font()`
+Don't use the default font.
 
 ```{python}
-gt_tbl_10 = gt_tbl_9.opt_table_font(stack="humanist")
+gt_tbl_10 = # (
+    # gt_tbl_9
+#)
 
 gt_tbl_10
 ```
 
-`.opt_horizontal_padding()`
+Make more space between neighboring values.
 
 ```{python}
-gt_tbl_11 = gt_tbl_10.opt_horizontal_padding(scale=3)
+gt_tbl_11 = # (
+    # gt_tbl_10
+#)
 
 gt_tbl_11
 ```
