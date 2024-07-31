@@ -22,6 +22,8 @@ power_generation <- readr::read_csv("data/power-generation.csv")
 power_generation
 ```
 
+Let's get the data into gt.
+
 ```{r}
 gt_tbl_1 <- gt(power_generation)
 
@@ -30,53 +32,41 @@ gt_tbl_1
 
 ## Adding Structure to the Table
 
-`tab_header()` + `md()`
+Add a title to the table to explain contents. Use this title:
+
+"2023 Mean Carbon Intensity (gCO2eq/kWh) and Power Consumption Breakdown (%)"
+
+and make sure 'Carbon Intensity' and 'Power Consumption' are in bold lettering.
 
 ```{r}
-gt_tbl_2 <-
-    gt_tbl_1 |>
-    tab_header(
-        title = md("2023 Mean **Carbon Intensity** (gCO2eq/kWh) and **Power Consumption** Breakdown (%)")
-    )
+gt_tbl_2 <- gt_tbl_1 # |>
 
 gt_tbl_2
 ```
 
-`tab_source_note()` + `md()`
+Add some explanations to the footer of the table (to further explain things).
+Provide the data source (`api.electricitymap.org`) and the methodology (linking 
+to `https://www.electricitymaps.com/methodology`). Also state that some
+emissions factors are based on IPCC 2014 defaults, while some are based on
+more accurate regional factors.
 
 ```{r}
-gt_tbl_3 <-
-    gt_tbl_2 |>
-    tab_source_note(
-        md("
-**Source**: api.electricitymap.org | 
-**Methodology**: https://www.electricitymaps.com/methodology.
-Some emissions factors are based on IPCC 2014 defaults, while some are
-based on more accurate regional factors.
-<br>All zones are publicly available on the *Carbon intensity and emission factors* tab via Google docs link
-"
-        )
-    )
+gt_tbl_3 <- gt_tbl_2 # |>
 
 gt_tbl_3
 ```
 
-`cols_width()`
+Make the width of the `Zone` column 120px. All other columns fixed at 85px.
 
 ```{r}
-gt_tbl_4 <-
-    gt_tbl_3 |>
-    cols_width(
-        Zone ~ "120px",
-        everything() ~ "85px"
-    ) 
+gt_tbl_4 <- gt_tbl_3 # |>
 
 gt_tbl_4
 ```
 
 ## Formatting Values Within the Table Body
 
-`fmt_percent()`
+Format the fractional values by turning them into percentages.
 
 ```{r}
 gt_tbl_5 <-
@@ -89,7 +79,7 @@ gt_tbl_5 <-
 gt_tbl_5
 ```
 
-`fmt_integer()`
+Ensure that the `CO2 Intensity` values are formatted as integers.
 
 ```{r}
 gt_tbl_6 <- gt_tbl_5 |> fmt_integer(columns=`CO2 Intensity`)
@@ -99,7 +89,7 @@ gt_tbl_6
 
 ## Styling the Table
 
-`data_color()` - 1
+Color the cells in the `CO2 Intensity` column according to value (in range of 0 to 900). Use the green to brown palette.
 
 ```{r}
 gt_tbl_7 <-
@@ -117,7 +107,7 @@ gt_tbl_7 <-
 gt_tbl_7
 ```
 
-`data_color()` - 2
+Color the cells in the `Hydro` to `Geothermal` columns according to value (in range of 0 to 1). Use the white to green palette.
 
 ```{r}
 gt_tbl_8 <-
@@ -132,7 +122,7 @@ gt_tbl_8 <-
 gt_tbl_8
 ```
 
-`data_color()` - 3
+Color the cells in the `Biomass` column according to value (in range of 0 to 0.3). Use the white to light-brown palette.
 
 ```{r}
 gt_tbl_9 <-
@@ -146,7 +136,7 @@ gt_tbl_9 <-
 gt_tbl_9
 ```
 
-`data_color()` - 4
+Color the cells in the `Gas` to `Oil` columns according to value (in range of 0 to 1). Use the white to dark-brown palette.
 
 ```{r}
 gt_tbl_10 <-
@@ -161,7 +151,7 @@ gt_tbl_10 <-
 gt_tbl_10
 ```
 
-`tab_style()`
+Ensure the remaining body cells have the 'snow' color applied.
 
 ```{r}
 gt_tbl_11 <-
@@ -176,7 +166,7 @@ gt_tbl_11
 
 ## Making Some Final Tweaks
 
-`cols_align()` - 1
+As a starting point, align all cell contents (and the column labels) with center alignment.
 
 ```{r}
 gt_tbl_12 <- gt_tbl_11 |> cols_align(align = "center")
@@ -184,7 +174,7 @@ gt_tbl_12 <- gt_tbl_11 |> cols_align(align = "center")
 gt_tbl_12
 ```
 
-`cols_align()` - 2
+As a tweak, align the `Zone` column to the left.
 
 ```{r}
 gt_tbl_13 <- gt_tbl_12 |> cols_align(align = "left", columns = Zone)
@@ -192,7 +182,7 @@ gt_tbl_13 <- gt_tbl_12 |> cols_align(align = "left", columns = Zone)
 gt_tbl_13
 ```
 
-`opt_table_font()`
+Use the 'humanist' font stack for this table.
 
 ```{r}
 gt_tbl_14 <- gt_tbl_13 |> opt_table_font(stack = "humanist")
@@ -200,7 +190,7 @@ gt_tbl_14 <- gt_tbl_13 |> opt_table_font(stack = "humanist")
 gt_tbl_14
 ```
 
-`tab_options()`
+Make some serious tweaks to the table with `tab_options()`.
 
 ```{r}
 gt_tbl_15 <-
