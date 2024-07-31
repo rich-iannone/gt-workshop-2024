@@ -24,166 +24,133 @@ coffee_sales = pl.DataFrame.deserialize("data/coffee-sales.json", format="json")
 coffee_sales
 ```
 
-`GT()`
+Let's get the data into Great Tables.
 
 ```{python}
-gt_tbl_1 = GT(...) # <- what do we introduce to GT()?
+gt_tbl_1 = #
 
 gt_tbl_1
 ```
 
 ## Adding Structure to the Table
 
-`.tab_header()`
+Add a title to the table to explain contents.
 
 ```{python}
-gt_tbl_2 = gt_tbl_1.tab_header(title="Sales of Coffee Equipment")
+gt_tbl_2 = # (
+    #gt_tbl_1
+#)
 
 gt_tbl_2
 ```
 
-`.tab_spanner()`
+Group numerical columns with a spanner. One grouping should be for revenue columns, another should be for profit columns.
 
 ```{python}
-# We want two spanners in our table
-gt_tbl_3 = (
-    gt_tbl_2
-    .tab_spanner(label="Revenue", columns=cs.starts_with("revenue"))
-    # .tab_spanner(...) 
-)
+gt_tbl_3 = # (
+    #gt_tbl_2
+#)
 
 gt_tbl_3
 ```
 
-`.cols_label()`
+Change Column labels for readability. The column names are:
+`icon`, `product`, `revenue_dollars`, `revenue_pct`, `profit_dollars`, `profit_pct`, and `monthly_sales`.
 
 ```{python}
-# We want to make `icon` blank and re-label all other columns
-gt_tbl_4 = (
-    gt_tbl_3
-    .cols_label(
-        product="Product",
-        revenue_dollars="Amount",
-        revenue_pct="Percent",
-        monthly_sales="Monthly Sales"
-    )
-)
+gt_tbl_4 = # (
+    #gt_tbl_3
+#)
 
 gt_tbl_4
 ```
 
 ## Formatting Values Within the Table Body
 
-`.fmt_currency()`
+Format the currency values to make them look better.
 
 ```{python}
-gt_tbl_5 = (
-    gt_tbl_4
-    .fmt_currency(
-        columns=...("..."), # <- Need to select columns here
-        use_subunits=False
-    )
-)
+gt_tbl_5 = # (
+    #gt_tbl_4
+#)
 
 gt_tbl_5
 ```
 
-`.fmt_percent()`
+Format the fractional values by turning them into percentages.
 
 ```{python}
-gt_tbl_6 = (
-    gt_tbl_5
-    .fmt_percent(
-        columns=cs.ends_with("..."), # <- What string do we use?
-        decimals=0
-    )
-)
+gt_tbl_6 = # (
+    #gt_tbl_5
+#)
 
 gt_tbl_6
 ```
 
 ## Styling the Table
 
-`.tab_style()` - 1
+Add an 'aliceblue' background to columns pertaining to revenue.
 
 ```{python}
-gt_tbl_7 = (
-    gt_tbl_6
-    .tab_style(
-        style=style.fill(color="aliceblue"),
-        locations=loc.body(columns=...("revenue")) # <- ?
-    )
-)
+gt_tbl_7 = # (
+    #gt_tbl_6
+#)
 
 gt_tbl_7
 ```
 
-`.tab_style()` - 2
+Add an 'papayawhip' background to columns pertaining to profit.
 
 ```{python}
-gt_tbl_8 = (
-    gt_tbl_7
-    .tab_style(
-        style=style.______(color="papayawhip"), # <- fn for specifying a fill?
-        locations=loc.body(columns=...("profit")) # <- ?
-    )
-)
+gt_tbl_8 = # (
+    #gt_tbl_7
+#)
 
 gt_tbl_8
 ```
 
-`.tab_style()` - 3
+Make the text bold in the bottom row (the totals column).
 
 ```{python}
-gt_tbl_9 = (
-    gt_tbl_8
-    .tab_style(
-        style=style.text(weight="bold"),
-        locations=loc.body(rows=pl.col("product") == "..."), # <- What str?
-    )
-)
+gt_tbl_9 = # (
+    #gt_tbl_8
+#)
 
 gt_tbl_9
 ```
 
 ## Adding a Column of Nanoplots
 
-`.fmt_nanoplot()`
+Add a column of bar plots using the monthly revenue column.
 
 ```{python}
-gt_tbl_10 = (
-    gt_tbl_9
-    .fmt_nanoplot(
-        columns="monthly_sales",
-        plot_type="bar"
-    )
-)
+gt_tbl_10 = # (
+    #gt_tbl_9
+#)
 
 gt_tbl_10
 ```
 
 ## Adding Images to the Table
 
-`.fmt_image()`
+Add images to the `icon` column. The images are in the `img` directory.
 
 ```{python}
-gt_tbl_11 = (
-    gt_tbl_10
-    .fmt_image(
-        columns="icon",
-        path="img/"
-    )
-)
+gt_tbl_11 = # (
+    #gt_tbl_10
+#)
 
 gt_tbl_11
 ```
 
 ## Making a Final Tweak
 
-`.sub_missing()`
+Turn the `None` cell into a blank cell.
 
 ```{python}
-gt_tbl_12 = gt_tbl_11.sub_missing(missing_text="...") # <- How do we replace with blanks?
+gt_tbl_12 = # (
+    #gt_tbl_11
+#)
 
 gt_tbl_12
 ```
