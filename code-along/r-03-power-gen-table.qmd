@@ -22,8 +22,6 @@ power_generation <- readr::read_csv("data/power-generation.csv")
 power_generation
 ```
 
-`gt()`
-
 ```{r}
 gt_tbl_1 <- gt(power_generation)
 
@@ -51,13 +49,11 @@ gt_tbl_3 <-
     gt_tbl_2 |>
     tab_source_note(
         md("
-<br><div style=\"text-align: left;\">
-**Source**: api.electricitymap.org
-| **Methodology**: https://www.electricitymaps.com/methodology.
+**Source**: api.electricitymap.org | 
+**Methodology**: https://www.electricitymaps.com/methodology.
 Some emissions factors are based on IPCC 2014 defaults, while some are
 based on more accurate regional factors.
 <br>All zones are publicly available on the *Carbon intensity and emission factors* tab via Google docs link
-<br></div><br>
 "
         )
     )
