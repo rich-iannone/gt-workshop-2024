@@ -30,7 +30,7 @@ gt_tbl_1 <- gt(power_generation)
 gt_tbl_1
 ```
 
-## Adding Structure to the Table
+## tab_source_note() and cols_width()
 
 Add a title to the table to explain contents. Use this title:
 
@@ -87,7 +87,7 @@ gt_tbl_6 <- gt_tbl_5 |> fmt_integer(columns=`CO2 Intensity`)
 gt_tbl_6
 ```
 
-## Styling the Table
+## data_color()
 
 Color the cells in the `CO2 Intensity` column according to value (in range of 0 to 900). Use the green to brown palette.
 
@@ -164,7 +164,7 @@ gt_tbl_11 <-
 gt_tbl_11
 ```
 
-## Making Some Final Tweaks
+## cols_align() and tab_options()
 
 As a starting point, align all cell contents (and the column labels) with center alignment.
 
