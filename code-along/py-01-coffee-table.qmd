@@ -32,7 +32,7 @@ gt_tbl_1 = #
 gt_tbl_1
 ```
 
-## Adding Structure to the Table
+## Structure Basics
 
 Add a title to the table to explain contents.
 
@@ -65,7 +65,7 @@ gt_tbl_4 = # (
 gt_tbl_4
 ```
 
-## Formatting Values Within the Table Body
+## Formatting Basics
 
 Format the currency values to make them look better.
 
@@ -87,7 +87,7 @@ gt_tbl_6 = # (
 gt_tbl_6
 ```
 
-## Styling the Table
+## Styling with tab_style()
 
 Add an 'aliceblue' background to columns pertaining to revenue.
 
@@ -119,7 +119,7 @@ gt_tbl_9 = # (
 gt_tbl_9
 ```
 
-## Adding a Column of Nanoplots
+## Three Last Things
 
 Add a column of bar plots using the monthly revenue column.
 
@@ -131,8 +131,6 @@ gt_tbl_10 = # (
 gt_tbl_10
 ```
 
-## Adding Images to the Table
-
 Add images to the `icon` column. The images are in the `img` directory.
 
 ```{python}
@@ -142,8 +140,6 @@ gt_tbl_11 = # (
 
 gt_tbl_11
 ```
-
-## Making a Final Tweak
 
 Turn the `None` cell into a blank cell.
 
