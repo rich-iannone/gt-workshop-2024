@@ -46,7 +46,7 @@ gt_tbl_1 = GT(reactions_mini, rowname_col="cmpd_name")
 gt_tbl_1
 ```
 
-## Adding Structure to the Table
+## Introducing Units Notation
 
 Add a title to the table to explain contents.
 
@@ -92,7 +92,7 @@ gt_tbl_4 = (
 gt_tbl_4
 ```
 
-## Formatting Values Within the Table Body
+## Formatting for Science with fmt_chem() and fmt_scientific()
 
 Format the chemical formulas to make them look better.
 
@@ -132,7 +132,7 @@ gt_tbl_8 = gt_tbl_7.cols_hide(columns = "O3_k298")
 gt_tbl_8
 ```
 
-## Styling the Table
+## Using the opt_*() Functions for Quick Styling
 
 Use theming to style quickly.
 
@@ -141,8 +141,6 @@ gt_tbl_9 = gt_tbl_8.opt_stylize()
 
 gt_tbl_9
 ```
-
-## Making Some Final Tweaks
 
 Don't use the default font.
 
